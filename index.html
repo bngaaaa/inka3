@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HALOCOKO - Chocolate Ice Cream | INKA 3 Indramayu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50:'#fef2f2',100:'#fee2e2',200:'#fca5a5',300:'#f87171',400:'#ef4444',500:'#dc2626',600:'#b91c1c',700:'#991b1b',800:'#7f1d1d',900:'#450a0a' },
+                        coco: { 50:'#fdf8f0',100:'#f5e6d0',200:'#e0c8a0',300:'#c9a56c',400:'#b08840',500:'#8a6530',600:'#6b4d24',700:'#4a3518',800:'#2e1f0e',900:'#1a120a',950:'#100a05' }
+                    },
+                    fontFamily: { jakarta:['Plus Jakarta Sans','sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        body{font-family:'Plus Jakarta Sans',sans-serif;background:#100a05}
+        .scrollbar-hide::-webkit-scrollbar{display:none}
+        .scrollbar-hide{-ms-overflow-style:none;scrollbar-width:none}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes slideR{from{transform:translateX(100%)}to{transform:translateX(0)}}
+        @keyframes slideOut{from{transform:translateX(0)}to{transform:translateX(100%)}}
+        @keyframes toastIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes toastOut{from{opacity:1}to{opacity:0;transform:translateY(-10px)}}
+        @keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.2)}100%{transform:scale(1)}}
+        @keyframes glow{0%,100%{filter:drop-shadow(0 0 20px rgba(220,38,38,.2))}50%{filter:drop-shadow(0 0 35px rgba(220,38,38,.35))}}
+        .anim-up{animation:fadeUp .45s ease-out both}
+        .slide-r{animation:slideR .3s cubic-bezier(.16,1,.3,1) forwards}
+        .slide-out{animation:slideOut .25s ease-in forwards}
+        .toast-in{animation:toastIn .25s ease-out forwards}
+        .toast-out{animation:toastOut .2s ease-in forwards}
+        .pop{animation:pop .2s ease}
+        .logo-glow{animation:glow 3s ease-in-out infinite}
+        .card{transition:transform .2s,box-shadow .2s,border-color .2s}
+        .card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+        .tab-b{transition:all .2s}
+        .tab-b.on{background:rgba(220,38,38,.12);color:#f87171;border-color:rgba(220,38,38,.25)}
+        .prod-img{object-fit:cover;transition:transform .3s}
+        .card:hover .prod-img{transform:scale(1.05)}
+    </style>
+</head>
+<body class="text-coco-100 font-jakarta min-h-screen">
+
+<div id="toasts" class="fixed top-4 left-1/2 -translate-x-1/2 z-[200] flex flex-col gap-2 pointer-events-none"></div>
+
+<!-- Navbar -->
+<nav class="fixed top-0 w-full z-50 bg-coco-950/90 backdrop-blur-lg border-b border-brand-900/20">
+    <div class="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <img src="https://z-cdn-media.chatglm.cn/files/4eb3eae2-a8b3-4ba2-91b0-38f754547d86.png?auth_key=1876332664-95accd10cf2c4881aeec879f19c643cf-0-174c0c0e8e2ee162413e913b884b8889" alt="HALOCOKO" class="h-9 w-auto object-contain flex-shrink-0">
+            <div class="hidden sm:block">
+                <p class="text-coco-100 font-bold text-sm leading-tight">HALOCOKO</p>
+                <p class="text-brand-400/60 text-[10px] font-medium tracking-wider">INKA 3 INDARAMAYU</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-3">
+            <a href="#menu" class="hidden sm:block text-xs text-coco-200/60 hover:text-coco-100 transition-colors">Menu</a>
+            <button onclick="openCart()" class="relative w-9 h-9 rounded-lg bg-coco-900 border border-coco-800/30 flex items-center justify-center text-coco-200 hover:text-brand-300 hover:border-brand-800/40 transition-all">
+                <i class="fas fa-bag-shopping text-xs"></i>
+                <span id="nBadge" class="hidden absolute -top-1 -right-1 min-w-[16px] h-4 rounded-full bg-brand-500 text-white text-[9px] font-bold flex items-center justify-center px-1">0</span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="pt-20 pb-10 px-4">
+    <div class="max-w-6xl mx-auto text-center py-8 sm:py-16">
+        <div class="flex justify-center mb-6 anim-up">
+            <img src="https://z-cdn-media.chatglm.cn/files/4eb3eae2-a8b3-4ba2-91b0-38f754547d86.png?auth_key=1876332664-95accd10cf2c4881aeec879f19c643cf-0-174c0c0e8e2ee162413e913b884b8889" alt="HALOCOKO Logo" class="w-60 sm:w-80 md:w-96 h-auto object-contain logo-glow">
+        </div>
+        <p class="text-brand-400 text-xs font-bold tracking-[.25em] uppercase mb-2 anim-up" style="animation-delay:.05s">INKA 3 INDARAMAYU</p>
+        <p class="text-coco-200/50 text-sm mb-8 anim-up" style="animation-delay:.1s">Es krim cokelat premium untuk keluarga — lembut, nikmat, halal.</p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 anim-up" style="animation-delay:.15s">
+            <a href="#menu" class="w-full sm:w-auto px-7 py-2.5 bg-brand-600 hover:bg-brand-500 text-white rounded-lg font-semibold text-sm transition-colors flex items-center justify-center gap-2">
+                <i class="fas fa-ice-cream text-xs"></i> Pesan Sekarang
+            </a>
+            <a href="https://wa.me/6289527286569" target="_blank" class="w-full sm:w-auto px-7 py-2.5 bg-coco-900 border border-coco-800/30 text-coco-200 hover:text-coco-100 hover:border-coco-700/40 rounded-lg font-semibold text-sm transition-all flex items-center justify-center gap-2">
+                <i class="fab fa-whatsapp text-green-500 text-xs"></i> Hubungi Kami
+            </a>
+        </div>
+        <div class="flex items-center justify-center gap-8 mt-12 anim-up" style="animation-delay:.2s">
+            <div class="text-center"><p class="text-xl font-bold text-coco-300">23+</p><p class="text-[10px] text-coco-200/40 mt-0.5">Varian</p></div>
+            <div class="w-px h-6 bg-coco-800/30"></div>
+            <div class="text-center"><p class="text-xl font-bold text-coco-300">5</p><p class="text-[10px] text-coco-200/40 mt-0.5">Kategori</p></div>
+            <div class="w-px h-6 bg-coco-800/30"></div>
+            <div class="text-center"><p class="text-xl font-bold text-coco-300">100%</p><p class="text-[10px] text-coco-200/40 mt-0.5">Halal</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- Menu -->
+<section id="menu" class="max-w-6xl mx-auto px-4 pb-16">
+    <div class="flex items-center justify-between mb-4">
+        <h2 class="text-xl font-bold text-coco-50">Menu</h2>
+        <p class="text-[10px] text-coco-200/30">Tap + untuk menambah</p>
+    </div>
+    <div id="tabs" class="flex gap-1.5 overflow-x-auto pb-3 mb-4 scrollbar-hide -mx-4 px-4"></div>
+    <div id="grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5"></div>
+</section>
+
+<!-- Footer -->
+<footer class="border-t border-coco-800/15 py-6 px-4">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div class="flex items-center gap-3">
+            <img src="https://z-cdn-media.chatglm.cn/files/4eb3eae2-a8b3-4ba2-91b0-38f754547d86.png?auth_key=1876332664-95accd10cf2c4881aeec879f19c643cf-0-174c0c0e8e2ee162413e913b884b8889" alt="HALOCOKO" class="h-7 w-auto object-contain">
+            <span class="text-coco-200/30 text-xs">© 2025 HALOCOKO — INKA 3 Indramayu</span>
+        </div>
+        <a href="https://wa.me/6289527286569" target="_blank" class="text-brand-400/60 hover:text-brand-300 text-xs flex items-center gap-1.5 transition-colors">
+            <i class="fab fa-whatsapp"></i> 0895-2728-6569
+        </a>
+    </div>
+</footer>
+
+<!-- FAB -->
+<button id="fab" onclick="openCart()" class="fixed bottom-5 right-5 z-50 hidden w-12 h-12 rounded-full bg-brand-600 text-white shadow-lg shadow-brand-600/30 flex items-center justify-center hover:bg-brand-500 transition-colors">
+    <i class="fas fa-bag-shopping"></i>
+    <span id="fBadge" class="hidden absolute -top-1 -right-1 min-w-[16px] h-4 rounded-full bg-white text-brand-600 text-[9px] font-bold flex items-center justify-center px-1">0</span>
+</button>
+
+<!-- Cart -->
+<div id="cartOv" class="fixed inset-0 z-[60] hidden">
+    <div class="absolute inset-0 bg-black/50" onclick="closeCart()"></div>
+    <div id="cartP" class="absolute right-0 top-0 bottom-0 w-full max-w-sm bg-coco-950 border-l border-coco-800/20 flex flex-col">
+        <div class="flex items-center gap-3 px-4 py-3 border-b border-coco-800/20">
+            <img src="https://z-cdn-media.chatglm.cn/files/4eb3eae2-a8b3-4ba2-91b0-38f754547d86.png?auth_key=1876332664-95accd10cf2c4881aeec879f19c643cf-0-174c0c0e8e2ee162413e913b884b8889" alt="" class="h-7 w-auto object-contain">
+            <h3 class="font-bold text-coco-50 text-sm flex-1">Keranjang Pesanan</h3>
+            <button onclick="closeCart()" class="w-7 h-7 rounded-md bg-coco-900 flex items-center justify-center text-coco-200/50 hover:text-coco-100 text-xs"><i class="fas fa-xmark"></i></button>
+        </div>
+        <div id="cartList" class="flex-1 overflow-y-auto px-4 py-3 scrollbar-hide"></div>
+        <div id="cartEmpty" class="flex-1 flex items-center justify-center"><div class="text-center text-coco-200/25"><i class="fas fa-bag-shopping text-3xl mb-2"></i><p class="text-xs">Belum ada pesanan</p></div></div>
+        <div id="cartFoot" class="hidden border-t border-coco-800/20 px-4 py-3 bg-coco-900/40">
+            <div class="flex justify-between text-sm mb-1"><span class="text-coco-200/50">Total Bayar</span><span id="cTotal" class="text-coco-50 font-bold">Rp 0</span></div>
+            <button onclick="sendWA()" class="w-full py-2.5 bg-green-600 hover:bg-green-500 text-white rounded-lg font-semibold text-sm mt-2 transition-colors flex items-center justify-center gap-2">
+                <i class="fab fa-whatsapp text-base"></i> Pesan via WhatsApp
+            </button>
+            <button onclick="clearCart()" class="w-full py-1.5 text-coco-200/30 hover:text-brand-300 text-[11px] mt-1 transition-colors">Kosongkan keranjang</button>
+        </div>
+    </div>
+</div>
+
+<script>
+const LOGO='https://z-cdn-media.chatglm.cn/files/4eb3eae2-a8b3-4ba2-91b0-38f754547d86.png?auth_key=1876332664-95accd10cf2c4881aeec879f19c643cf-0-174c0c0e8e2ee162413e913b884b8889';
+
+const CATS=[
+    {id:'all',n:'Semua',ic:'fa-grip'},
+    {id:'premium',n:'Premium',ic:'fa-crown',t:'Rp 5.000/pcs'},
+    {id:'deluxe',n:'Deluxe',ic:'fa-gem',t:'Rp 4.000/pcs'},
+    {id:'classic',n:'Classic',ic:'fa-star',t:'Rp 3.000/pcs'},
+    {id:'special',n:'Special',ic:'fa-heart',t:'Rp 2.000/pcs'},
+    {id:'kastiles',n:'KastilEs',ic:'fa-chess-rook',t:'Rp 2.000/pcs'}
+];
+
+const PROD=[
+    {id:1,n:'HaloChoco',p:158000,c:'premium',t:'Rp 5.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/a08848e8-2403-4954-9bd2-79d6b2adaeb5.jpg?auth_key=1876334364-189b4bffdea547c58d2605cadf49dc03-0-3a8d201e3d37f30a05badaeab877a900'},
+    {id:2,n:'HaloCookies',p:158000,c:'premium',t:'Rp 5.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/581e0a9e-a7fc-4184-9466-55bb4e31c8da.jpg?auth_key=1876335412-f7625ff55c40419fb7a5447a51f41056-0-ee1c339eff0ede587fe340dccb250499'},
+    {id:3,n:'Joycup Coklat',p:94800,c:'premium',t:'Rp 5.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/a460e636-0607-4502-8555-0bb7ffc94d19.jpg?auth_key=1876334364-a96f662de9c54c38b0a5fbd09e04c3db-0-c24b6ba341926f2eec8dd77fb90e24d9'},
+    {id:4,n:'23° Choco Cone',p:143000,c:'deluxe',t:'Rp 4.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/472618ef-1a38-4232-9ecd-26b0045c677d.jpg?auth_key=1876334608-517189765afd463c8a6c0ef6d6f6fd2a-0-0c9c207409d26e65f4fed1997bf4f78a'},
+    {id:5,n:'Fantasy Almond',p:124800,c:'deluxe',t:'Rp 4.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/f8aaee6b-396c-4c6d-b541-2792fb5e0dc4.jpg?auth_key=1876334975-78f6621623b84b25919bedd8090ae629-0-722f8a3eab3edf61e6d0d8580e6deeba'},
+    {id:6,n:'Fantasy Caramel Malt',p:124800,c:'deluxe',t:'Rp 4.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/98a267de-a04e-4976-a7d9-2efcdb8f0863.jpg?auth_key=1876334364-b1c1bcdb0b6b48999f173915b02ebebb-0-e45be24418f1ffd60bc0d806771ab679'},
+    {id:7,n:'Tiramisu Cookies',p:124000,c:'deluxe',t:'Rp 4.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/bb643af1-c631-46fe-bb6a-24f46f80cb28.jpg?auth_key=1876335412-ba2693ea72f14b91a577e1b97d0c6c26-0-06913ebc79a8f6030b11d7f6cad5a994'},
+    {id:8,n:'143 Cup Strawberry',p:93000,c:'classic',t:'Rp 3.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/07363091-6b17-4803-9880-1c312ab1b731.jpg?auth_key=1876334364-65da03e916f549049a2381e779556dfd-0-8b47c2fa4b821e9d644cbc610d6ff113'},
+    {id:9,n:'KaKaKres Cokelat',p:92800,c:'classic',t:'Rp 3.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/cabf45ec-7fbf-4842-83bc-1beebf1d3261.jpg?auth_key=1876333067-b63f6b52de904252939281f30bd65fa4-0-17b85dfefc88766a7a45706bbafc9622'},
+    {id:10,n:'PisCok Krispi',p:92800,c:'classic',t:'Rp 3.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/b9fe4075-b451-4192-ada6-6fd6f17f22b7.jpg?auth_key=1876334364-22cf08a988c2473faad2ce4c7f995849-0-6c353834c09bf33113bb5f280beecc33'},
+    {id:11,n:'Tiger Choco',p:92800,c:'classic',t:'Rp 3.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/665cda64-8ea9-4b7d-b2b5-b738ac84cf5f.jpg?auth_key=1876333067-df24c5f11ca744d9a7cfd76b117f2e54-0-7bdea144aebbd6bacb04c4cfb5a5ed6e'},
+    {id:12,n:'Red Zebra Choco',p:92800,c:'classic',t:'Rp 3.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/b8f0857c-4a5a-411e-8c5b-7ea7a7273d1b.jpg?auth_key=1876335412-d077e1940ec14e17bc1ce9d5903f7d54-0-4914a0730bc79fe01655b29554504d34'},
+    {id:13,n:'SuKoCo Kopi',p:93000,c:'special',t:'Rp 2.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/0da0039b-6de6-49f6-83c2-2d2d0a081d56.jpg?auth_key=1876333067-c0f8f56ae397442bbfc77f89dc5ae9be-0-da3a577601d5e11972684bc502a89d11'},
+    {id:14,n:'SuTaCo Taro',p:93000,c:'special',t:'Rp 2.000/pcs',img:''},
+    {id:15,n:'SuMiCo Milo',p:93000,c:'special',t:'Rp 2.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/6d4ef0c0-ef40-4711-bf38-10de72c1c399.jpg?auth_key=1876333067-52e5a6e5b2d648b6a76c3b5d15cc214a-0-4359cd3c75d7cfb7cbfa5ea96b42a427'},
+    {id:16,n:'Yogurt Krispi',p:93000,c:'special',t:'Rp 2.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/179412c4-2e65-435a-9fdf-c5b652585c8f.jpg?auth_key=1876335412-f9f5e37a6b724d3a830c4b659a6e08ba-0-b966d94bf52554f32b4a33cfdf5f76f5'},
+    {id:17,n:'KastilEs Yogurt',p:77500,c:'kastiles',t:'Rp 2.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/36ebfa1c-f771-4672-b035-2b8f9d9b8cac.jpg?auth_key=1876334364-4e5aceb699ed40cbb620f1944a162ecd-0-d4e5a4a5b23a7eec95aaa50a19f54b8f'},
+    {id:18,n:'KastilEs Cokelat',p:77500,c:'kastiles',t:'Rp 2.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/b392f29c-8793-4369-87ae-61f6386f590b.jpg?auth_key=1876334364-4cf82553550d43cc86c5726f711dd2db-0-691b61ee87124a2b8ed63df9a428fc58'},
+    {id:19,n:'KastilEs Semangka Nanas',p:77500,c:'kastiles',t:'Rp 2.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/a29be2b5-aaea-4439-9d73-263002164c54.jpg?auth_key=1876333067-3e9fea21f01e4252b14be9cf26883ed7-0-cc81f1edf7d538eb10a2fd64312ef299'},
+    {id:20,n:'KastilEs Anggur Melon',p:77500,c:'kastiles',t:'Rp 2.000/pcs',img:''},
+    {id:21,n:'KastilEs Kopi',p:77500,c:'kastiles',t:'Rp 2.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/18a317c0-6ce2-4483-9ff2-693c0a7d6292.jpg?auth_key=1876333067-a2cfdea788df485ca62d6e56c1e00a36-0-71764f67dc7fa1e92ad6d6090ab48635'},
+    {id:22,n:'KastilEs Teh',p:77500,c:'kastiles',t:'Rp 2.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/482f7abd-a011-4415-9eb3-0b680b3a2df6.jpg?auth_key=1876334364-edb9a2ba5b924fb99d7fb56dbebc4a5b-0-7f002127ed9536c3daf40d4144e4f3e9'},
+    {id:23,n:'KastilEs Gula Kelapa',p:77500,c:'kastiles',t:'Rp 2.000/pcs',img:''}
+];
+
+const META={
+    premium:{e:'🏆',l:'Premium'},deluxe:{e:'💎',l:'Deluxe'},
+    classic:{e:'⭐',l:'Classic'},special:{e:'💜',l:'Special'},
+    kastiles:{e:'🏰',l:'KastilEs'}
+};
+const fmt=n=>'Rp '+n.toLocaleString('id-ID');
+let cart={},curCat='all';
+
+function toast(m){
+    const c=document.getElementById('toasts'),d=document.createElement('div');
+    d.className='toast-in pointer-events-auto px-3 py-2 bg-coco-900 border border-coco-800/30 rounded-lg text-xs text-coco-100 shadow-xl flex items-center gap-2';
+    d.innerHTML=`<i class="fas fa-check-circle text-green-400 text-[10px]"></i>${m}`;
+    c.appendChild(d);
+    setTimeout(()=>{d.classList.replace('toast-in','toast-out');setTimeout(()=>d.remove(),200)},1500);
+}
+
+function renderTabs(){
+    document.getElementById('tabs').innerHTML=CATS.map(c=>
+        `<button onclick="setCat('${c.id}')" class="tab-b flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-transparent text-xs font-medium text-coco-200/50 hover:text-coco-100 ${curCat===c.id?'on':''}">
+            <i class="fas ${c.ic} text-[10px]"></i>${c.n}${c.t?`<span class="hidden sm:inline text-[9px] opacity-40">${c.t}</span>`:''}
+        </button>`).join('');
+}
+function setCat(id){curCat=id;renderTabs();renderGrid();}
+
+function imgHTML(p){
+    if(p.img) return `<img src="${p.img}" alt="${p.n}" class="prod-img w-full h-full" loading="lazy">`;
+    return `<div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-coco-800/20 to-coco-900/20"><i class="fas fa-ice-cream text-2xl text-coco-700/30"></i></div>`;
+}
+
+function renderGrid(){
+    const g=document.getElementById('grid');
+    const list=curCat==='all'?PROD:PROD.filter(p=>p.c===curCat);
+    g.innerHTML=list.map((p,i)=>{
+        const q=cart[p.id]||0,sel=q>0,m=META[p.c];
+        return `<div id="c${p.id}" class="card bg-coco-900/70 rounded-xl overflow-hidden border ${sel?'border-brand-600/50':'border-coco-800/15'} anim-up" style="animation-delay:${i*30}ms">
+            <div class="aspect-[4/3] overflow-hidden relative">
+                ${imgHTML(p)}
+                <span class="absolute top-1.5 left-1.5 text-[9px] px-1.5 py-0.5 rounded bg-black/60 backdrop-blur-sm text-coco-300/70 font-medium">${m.e} ${m.l}</span>
+                <span id="cb${p.id}" class="${sel?'absolute top-1.5 right-1.5 w-5 h-5 rounded-full bg-brand-500 text-white text-[9px] font-bold flex items-center justify-center':'hidden'}">${sel?q:''}</span>
+            </div>
+            <div class="p-2.5">
+                <span class="text-[9px] px-1.5 py-0.5 rounded bg-brand-900/20 text-brand-300/50 font-medium">${p.t}</span>
+                <h3 class="font-semibold text-coco-50 text-xs mt-1 truncate">${p.n}</h3>
+                <p class="text-coco-300 font-bold text-sm my-1.5">${fmt(p.p)}</p>
+                <div class="flex items-center justify-center gap-2.5">
+                    <button id="mn${p.id}" onclick="chg(${p.id},-1)" class="w-7 h-7 rounded-md ${q>0?'bg-coco-800 text-coco-200 hover:text-red-400':'bg-coco-800/40 text-coco-200/20'} flex items-center justify-center transition-colors"><i class="fas fa-minus text-[9px]"></i></button>
+                    <span id="q${p.id}" class="text-coco-50 font-semibold text-sm w-4 text-center">${q}</span>
+                    <button onclick="chg(${p.id},1)" class="w-7 h-7 rounded-md bg-brand-700/30 text-brand-300 hover:bg-brand-700/50 flex items-center justify-center transition-colors"><i class="fas fa-plus text-[9px]"></i></button>
+                </div>
+                <p id="s${p.id}" class="text-center text-[10px] text-brand-300/60 font-medium mt-1 ${sel?'':'hidden'}">${sel?fmt(p.p*q):''}</p>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+function chg(id,d){
+    const cur=cart[id]||0,nxt=Math.max(0,cur+d);
+    if(nxt===0) delete cart[id]; else cart[id]=nxt;
+    const p=PROD.find(x=>x.id===id),q=cart[id]||0,has=q>0;
+    const qEl=document.getElementById('q'+id);
+    const sEl=document.getElementById('s'+id);
+    const card=document.getElementById('c'+id);
+    const badge=document.getElementById('cb'+id);
+    const mn=document.getElementById('mn'+id);
+    if(!qEl)return;
+    qEl.textContent=q;
+    qEl.classList.add('pop');setTimeout(()=>qEl.classList.remove('pop'),200);
+    sEl.classList.toggle('hidden',!has);
+    if(has)sEl.textContent=fmt(p.p*q);
+    if(has){badge.className='absolute top-1.5 right-1.5 w-5 h-5 rounded-full bg-brand-500 text-white text-[9px] font-bold flex items-center justify-center';badge.textContent=q;}
+    else{badge.className='hidden';}
+    card.classList.toggle('border-brand-600/50',has);
+    card.classList.toggle('border-coco-800/15',!has);
+    mn.className=`w-7 h-7 rounded-md ${has?'bg-coco-800 text-coco-200 hover:text-red-400':'bg-coco-800/40 text-coco-200/20'} flex items-center justify-center transition-colors`;
+    updBadge();
+    if(has&&d>0)toast(`${p.n} +1`);
+}
+
+function updBadge(){
+    const cnt=Object.values(cart).reduce((a,b)=>a+b,0);
+    ['nBadge','fBadge'].forEach(id=>{
+        const el=document.getElementById(id);
+        if(cnt>0){el.classList.remove('hidden');el.classList.add('flex');el.textContent=cnt>99?'99+':cnt;}
+        else{el.classList.add('hidden');el.classList.remove('flex');}
+    });
+    document.getElementById('fab').classList.toggle('hidden',cnt===0);
+}
+
+function clearCart(){cart={};updBadge();renderGrid();renderCartList();toast('Keranjang dikosongkan');}
+
+function openCart(){
+    const o=document.getElementById('cartOv'),p=document.getElementById('cartP');
+    o.classList.remove('hidden');p.classList.remove('slide-out');p.classList.add('slide-r');
+    renderCartList();
+}
+function closeCart(){
+    const p=document.getElementById('cartP');
+    p.classList.remove('slide-r');p.classList.add('slide-out');
+    setTimeout(()=>document.getElementById('cartOv').classList.add('hidden'),250);
+}
+
+function renderCartList(){
+    const list=document.getElementById('cartList'),empty=document.getElementById('cartEmpty'),foot=document.getElementById('cartFoot');
+    const entries=Object.entries(cart);
+    if(!entries.length){list.classList.add('hidden');empty.classList.remove('hidden');foot.classList.add('hidden');return;}
+    list.classList.remove('hidden');empty.classList.add('hidden');foot.classList.remove('hidden');
+    const grouped={};
+    entries.forEach(([id,qty])=>{const p=PROD.find(x=>x.id===+id);if(!p)return;if(!grouped[p.c])grouped[p.c]=[];grouped[p.c].push({...p,qty});});
+    let html='',total=0;
+    Object.entries(grouped).forEach(([cat,items])=>{
+        const m=META[cat];
+        html+=`<div class="mb-3"><p class="text-[10px] font-semibold text-coco-300/40 uppercase tracking-wider mb-1.5">${m.e} ${m.l} — ${items[0].t}</p>`;
+        items.forEach(it=>{
+            total+=it.p*it.qty;
+            html+=`<div class="flex items-center gap-2 p-2 rounded-lg bg-coco-900/50 border border-coco-800/10 mb-1.5">
+                ${it.img?`<img src="${it.img}" alt="" class="w-9 h-9 rounded-md object-cover flex-shrink-0">`:`<div class="w-9 h-9 rounded-md bg-coco-800/30 flex items-center justify-center flex-shrink-0"><i class="fas fa-ice-cream text-coco-700/40 text-xs"></i></div>`}
+                <div class="flex-1 min-w-0">
+                    <p class="text-coco-50 text-xs font-medium truncate">${it.n}</p>
+                    <p class="text-coco-200/30 text-[10px]">${fmt(it.p)} × ${it.qty}</p>
+                </div>
+                <div class="flex items-center gap-1 bg-coco-800/50 rounded px-0.5 py-0.5">
+                    <button onclick="cChg(${it.id},-1)" class="w-5 h-5 rounded flex items-center justify-center text-coco-200/40 hover:text-red-400 text-[9px]"><i class="fas fa-minus"></i></button>
+                    <span class="text-coco-50 text-[11px] font-semibold w-3 text-center">${it.qty}</span>
+                    <button onclick="cChg(${it.id},1)" class="w-5 h-5 rounded flex items-center justify-center text-coco-200/40 hover:text-brand-300 text-[9px]"><i class="fas fa-plus"></i></button>
+                </div>
+                <span class="text-coco-300 text-[11px] font-semibold w-16 text-right">${fmt(it.p*it.qty)}</span>
+            </div>`;
+        });
+        html+='</div>';
+    });
+    list.innerHTML=html;
+    document.getElementById('cTotal').textContent=fmt(total);
+}
+
+function cChg(id,d){chg(id,d);renderCartList();}
+
+function sendWA(){
+    const entries=Object.entries(cart);
+    if(!entries.length)return;
+    const now=new Date();
+    const ds=now.toLocaleDateString('id-ID',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+    const ts=now.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
+    let m='🍦 *HALOCOKO — Nota Pemesanan*\n━━━━━━━━━━━━━━━━━━━\n\n';
+    m+=`📅 ${ds}\n🕐 ${ts} WIB\n\n📋 *Detail Pesanan:*\n\n`;
+    const grouped={};
+    entries.forEach(([id,qty])=>{const p=PROD.find(x=>x.id===+id);if(!p)return;if(!grouped[p.c])grouped[p.c]=[];grouped[p.c].push({...p,qty});});
+    let num=1,totQ=0,totP=0;
+    Object.entries(grouped).forEach(([cat,items])=>{
+        const m2=META[cat];
+        m+=`━━ ${m2.e} *${m2.l}* (${items[0].t}) ━━\n\n`;
+        items.forEach(it=>{const sub=it.p*it.qty;m+=`${num}. *${it.n}*\n   ${fmt(it.p)} × ${it.qty} pcs = *${fmt(sub)}*\n\n`;num++;totQ+=it.qty;totP+=sub;});
+    });
+    m+='━━━━━━━━━━━━━━━━━━━\n';
+    m+=`📦 Total : ${totQ} pcs\n💰 *Bayar : ${fmt(totP)}*\n━━━━━━━━━━━━━━━━━━━\n\n`;
+    m+='Mohon konfirmasi pesanan ini 🙏\nTerima kasih! — HALOCOKO INKA 3 Indramayu 🍦';
+    window.open('https://wa.me/6289527286569?text='+encodeURIComponent(m),'_blank');
+    setTimeout(()=>closeCart(),400);
+}
+
+renderTabs();renderGrid();updBadge();
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCart();});
+</script>
+</body>
+</html>
