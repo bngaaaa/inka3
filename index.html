@@ -39,9 +39,9 @@
         .pop{animation:pop .2s ease}
         .logo-glow{animation:glow 3s ease-in-out infinite}
         .card{transition:transform .2s,box-shadow .2s,border-color .2s}
-        .card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+        .card:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,0,0,.4)}
         .tab-b{transition:all .2s}
-        .tab-b.on{background:rgba(220,38,38,.12);color:#f87171;border-color:rgba(220,38,38,.25)}
+        .tab-b.on{background:rgba(220,38,38,.15);color:#f87171;border-color:rgba(220,38,38,.3)}
         .prod-img{object-fit:cover;transition:transform .3s}
         .card:hover .prod-img{transform:scale(1.05)}
     </style>
@@ -51,67 +51,60 @@
 <div id="toasts" class="fixed top-4 left-1/2 -translate-x-1/2 z-[200] flex flex-col gap-2 pointer-events-none"></div>
 
 <!-- Navbar -->
-<nav class="fixed top-0 w-full z-50 bg-coco-950/90 backdrop-blur-lg border-b border-brand-900/20">
-    <div class="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
+<nav class="fixed top-0 w-full z-50 bg-coco-950/95 backdrop-blur-lg border-b border-brand-900/20">
+    <div class="max-w-xl mx-auto px-4 h-16 flex items-center justify-between"> <!-- max-w-xl untuk tampilan fokus HP -->
         <div class="flex items-center gap-3">
-            <img src="https://z-cdn-media.chatglm.cn/files/4eb3eae2-a8b3-4ba2-91b0-38f754547d86.png?auth_key=1876332664-95accd10cf2c4881aeec879f19c643cf-0-174c0c0e8e2ee162413e913b884b8889" alt="HALOCOKO" class="h-9 w-auto object-contain flex-shrink-0">
-            <div class="hidden sm:block">
-                <p class="text-coco-100 font-bold text-sm leading-tight">HALOCOKO</p>
-                <p class="text-brand-400/60 text-[10px] font-medium tracking-wider">INKA 3 INDARAMAYU</p>
+            <img src="https://z-cdn-media.chatglm.cn/files/4eb3eae2-a8b3-4ba2-91b0-38f754547d86.png?auth_key=1876332664-95accd10cf2c4881aeec879f19c643cf-0-174c0c0e8e2ee162413e913b884b8889" alt="HALOCOKO" class="h-10 w-auto object-contain flex-shrink-0">
+            <div class="block">
+                <p class="text-coco-100 font-bold text-base leading-tight">HALOCOKO</p>
+                <p class="text-brand-400/60 text-[11px] font-medium tracking-wider">INKA 3 INDARAMAYU</p>
             </div>
         </div>
         <div class="flex items-center gap-3">
             <a href="#menu" class="hidden sm:block text-xs text-coco-200/60 hover:text-coco-100 transition-colors">Menu</a>
-            <button onclick="openCart()" class="relative w-9 h-9 rounded-lg bg-coco-900 border border-coco-800/30 flex items-center justify-center text-coco-200 hover:text-brand-300 hover:border-brand-800/40 transition-all">
-                <i class="fas fa-bag-shopping text-xs"></i>
-                <span id="nBadge" class="hidden absolute -top-1 -right-1 min-w-[16px] h-4 rounded-full bg-brand-500 text-white text-[9px] font-bold flex items-center justify-center px-1">0</span>
+            <button onclick="openCart()" class="relative w-10 h-10 rounded-lg bg-coco-900 border border-coco-800/30 flex items-center justify-center text-coco-200 hover:text-brand-300 hover:border-brand-800/40 transition-all">
+                <i class="fas fa-bag-shopping text-sm"></i>
+                <span id="nBadge" class="hidden absolute -top-1 -right-1 min-w-[18px] h-5 rounded-full bg-brand-500 text-white text-[10px] font-bold flex items-center justify-center px-1">0</span>
             </button>
         </div>
     </div>
 </nav>
 
 <!-- Hero -->
-<section class="pt-20 pb-10 px-4">
-    <div class="max-w-6xl mx-auto text-center py-8 sm:py-16">
+<section class="pt-20 pb-6 px-4">
+    <div class="max-w-xl mx-auto text-center py-6">
         <div class="flex justify-center mb-6 anim-up">
-            <img src="https://z-cdn-media.chatglm.cn/files/4eb3eae2-a8b3-4ba2-91b0-38f754547d86.png?auth_key=1876332664-95accd10cf2c4881aeec879f19c643cf-0-174c0c0e8e2ee162413e913b884b8889" alt="HALOCOKO Logo" class="w-60 sm:w-80 md:w-96 h-auto object-contain logo-glow">
+            <img src="https://z-cdn-media.chatglm.cn/files/4eb3eae2-a8b3-4ba2-91b0-38f754547d86.png?auth_key=1876332664-95accd10cf2c4881aeec879f19c643cf-0-174c0c0e8e2ee162413e913b884b8889" alt="HALOCOKO Logo" class="w-64 h-auto object-contain logo-glow">
         </div>
         <p class="text-brand-400 text-xs font-bold tracking-[.25em] uppercase mb-2 anim-up" style="animation-delay:.05s">INKA 3 INDARAMAYU</p>
-        <p class="text-coco-200/50 text-sm mb-8 anim-up" style="animation-delay:.1s">Es krim cokelat premium untuk keluarga — lembut, nikmat, halal.</p>
+        <p class="text-coco-200/60 text-sm mb-6 anim-up" style="animation-delay:.1s">Es krim cokelat premium untuk keluarga — lembut, nikmat, halal.</p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-3 anim-up" style="animation-delay:.15s">
-            <a href="#menu" class="w-full sm:w-auto px-7 py-2.5 bg-brand-600 hover:bg-brand-500 text-white rounded-lg font-semibold text-sm transition-colors flex items-center justify-center gap-2">
-                <i class="fas fa-ice-cream text-xs"></i> Pesan Sekarang
+            <a href="#menu" class="w-full sm:w-auto px-8 py-3 bg-brand-600 hover:bg-brand-500 text-white rounded-lg font-bold text-base transition-colors flex items-center justify-center gap-2">
+                <i class="fas fa-ice-cream text-sm"></i> Pesan Sekarang
             </a>
-            <a href="https://wa.me/6289527286569" target="_blank" class="w-full sm:w-auto px-7 py-2.5 bg-coco-900 border border-coco-800/30 text-coco-200 hover:text-coco-100 hover:border-coco-700/40 rounded-lg font-semibold text-sm transition-all flex items-center justify-center gap-2">
-                <i class="fab fa-whatsapp text-green-500 text-xs"></i> Hubungi Kami
+            <a href="https://wa.me/6289527286569" target="_blank" class="w-full sm:w-auto px-8 py-3 bg-coco-900 border border-coco-800/30 text-coco-200 hover:text-coco-100 hover:border-coco-700/40 rounded-lg font-bold text-base transition-all flex items-center justify-center gap-2">
+                <i class="fab fa-whatsapp text-green-500 text-sm"></i> Hubungi Kami
             </a>
-        </div>
-        <div class="flex items-center justify-center gap-8 mt-12 anim-up" style="animation-delay:.2s">
-            <div class="text-center"><p class="text-xl font-bold text-coco-300">23+</p><p class="text-[10px] text-coco-200/40 mt-0.5">Varian</p></div>
-            <div class="w-px h-6 bg-coco-800/30"></div>
-            <div class="text-center"><p class="text-xl font-bold text-coco-300">5</p><p class="text-[10px] text-coco-200/40 mt-0.5">Kategori</p></div>
-            <div class="w-px h-6 bg-coco-800/30"></div>
-            <div class="text-center"><p class="text-xl font-bold text-coco-300">100%</p><p class="text-[10px] text-coco-200/40 mt-0.5">Halal</p></div>
         </div>
     </div>
 </section>
 
 <!-- Menu -->
-<section id="menu" class="max-w-6xl mx-auto px-4 pb-16">
+<section id="menu" class="max-w-xl mx-auto px-4 pb-20">
     <div class="flex items-center justify-between mb-4">
-        <h2 class="text-xl font-bold text-coco-50">Menu</h2>
-        <p class="text-[10px] text-coco-200/30">Tap + untuk menambah</p>
+        <h2 class="text-2xl font-bold text-coco-50">Daftar Menu</h2>
+        <p class="text-xs text-coco-200/40">Tap + untuk menambah</p>
     </div>
-    <div id="tabs" class="flex gap-1.5 overflow-x-auto pb-3 mb-4 scrollbar-hide -mx-4 px-4"></div>
-    <div id="grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5"></div>
+    <div id="tabs" class="flex gap-2 overflow-x-auto pb-3 mb-4 scrollbar-hide -mx-4 px-4"></div>
+    <div id="grid" class="grid grid-cols-2 gap-3"></div>
 </section>
 
 <!-- Footer -->
 <footer class="border-t border-coco-800/15 py-6 px-4">
-    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+    <div class="max-w-xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
         <div class="flex items-center gap-3">
-            <img src="https://z-cdn-media.chatglm.cn/files/4eb3eae2-a8b3-4ba2-91b0-38f754547d86.png?auth_key=1876332664-95accd10cf2c4881aeec879f19c643cf-0-174c0c0e8e2ee162413e913b884b8889" alt="HALOCOKO" class="h-7 w-auto object-contain">
-            <span class="text-coco-200/30 text-xs">© 2025 HALOCOKO — INKA 3 Indramayu</span>
+            <img src="https://z-cdn-media.chatglm.cn/files/4eb3eae2-a8b3-4ba2-91b0-38f754547d86.png?auth_key=1876332664-95accd10cf2c4881aeec879f19c643cf-0-174c0c0e8e2ee162413e913b884b8889" alt="HALOCOKO" class="h-8 w-auto object-contain">
+            <span class="text-coco-200/30 text-xs">© 2025 - 2026 HALOCOKO — INKA 3 Indramayu</span>
         </div>
         <a href="https://wa.me/6289527286569" target="_blank" class="text-brand-400/60 hover:text-brand-300 text-xs flex items-center gap-1.5 transition-colors">
             <i class="fab fa-whatsapp"></i> 0895-2728-6569
@@ -120,28 +113,46 @@
 </footer>
 
 <!-- FAB -->
-<button id="fab" onclick="openCart()" class="fixed bottom-5 right-5 z-50 hidden w-12 h-12 rounded-full bg-brand-600 text-white shadow-lg shadow-brand-600/30 flex items-center justify-center hover:bg-brand-500 transition-colors">
-    <i class="fas fa-bag-shopping"></i>
-    <span id="fBadge" class="hidden absolute -top-1 -right-1 min-w-[16px] h-4 rounded-full bg-white text-brand-600 text-[9px] font-bold flex items-center justify-center px-1">0</span>
+<button id="fab" onclick="openCart()" class="fixed bottom-6 right-6 z-50 hidden w-14 h-14 rounded-full bg-brand-600 text-white shadow-lg shadow-brand-600/40 flex items-center justify-center hover:bg-brand-500 transition-colors">
+    <i class="fas fa-bag-shopping text-lg"></i>
+    <span id="fBadge" class="hidden absolute -top-1 -right-1 min-w-[18px] h-5 rounded-full bg-white text-brand-600 text-[10px] font-bold flex items-center justify-center px-1">0</span>
 </button>
 
 <!-- Cart -->
 <div id="cartOv" class="fixed inset-0 z-[60] hidden">
-    <div class="absolute inset-0 bg-black/50" onclick="closeCart()"></div>
-    <div id="cartP" class="absolute right-0 top-0 bottom-0 w-full max-w-sm bg-coco-950 border-l border-coco-800/20 flex flex-col">
-        <div class="flex items-center gap-3 px-4 py-3 border-b border-coco-800/20">
-            <img src="https://z-cdn-media.chatglm.cn/files/4eb3eae2-a8b3-4ba2-91b0-38f754547d86.png?auth_key=1876332664-95accd10cf2c4881aeec879f19c643cf-0-174c0c0e8e2ee162413e913b884b8889" alt="" class="h-7 w-auto object-contain">
-            <h3 class="font-bold text-coco-50 text-sm flex-1">Keranjang Pesanan</h3>
-            <button onclick="closeCart()" class="w-7 h-7 rounded-md bg-coco-900 flex items-center justify-center text-coco-200/50 hover:text-coco-100 text-xs"><i class="fas fa-xmark"></i></button>
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeCart()"></div>
+    <div id="cartP" class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-coco-950 border-l border-coco-800/20 flex flex-col shadow-2xl">
+        <div class="flex items-center gap-3 px-5 py-4 border-b border-coco-800/20 bg-coco-900/30">
+            <img src="https://z-cdn-media.chatglm.cn/files/4eb3eae2-a8b3-4ba2-91b0-38f754547d86.png?auth_key=1876332664-95accd10cf2c4881aeec879f19c643cf-0-174c0c0e8e2ee162413e913b884b8889" alt="" class="h-8 w-auto object-contain">
+            <h3 class="font-bold text-coco-50 text-base flex-1">Keranjang</h3>
+            <button onclick="closeCart()" class="w-8 h-8 rounded-full bg-coco-800 flex items-center justify-center text-coco-200/50 hover:text-coco-100 transition-colors"><i class="fas fa-xmark text-sm"></i></button>
         </div>
-        <div id="cartList" class="flex-1 overflow-y-auto px-4 py-3 scrollbar-hide"></div>
-        <div id="cartEmpty" class="flex-1 flex items-center justify-center"><div class="text-center text-coco-200/25"><i class="fas fa-bag-shopping text-3xl mb-2"></i><p class="text-xs">Belum ada pesanan</p></div></div>
-        <div id="cartFoot" class="hidden border-t border-coco-800/20 px-4 py-3 bg-coco-900/40">
-            <div class="flex justify-between text-sm mb-1"><span class="text-coco-200/50">Total Bayar</span><span id="cTotal" class="text-coco-50 font-bold">Rp 0</span></div>
-            <button onclick="sendWA()" class="w-full py-2.5 bg-green-600 hover:bg-green-500 text-white rounded-lg font-semibold text-sm mt-2 transition-colors flex items-center justify-center gap-2">
-                <i class="fab fa-whatsapp text-base"></i> Pesan via WhatsApp
+        
+        <!-- Input Menu: Nama Toko & Lokasi Toko (Diperbesar) -->
+        <div class="px-5 py-4 border-b border-coco-800/20 bg-coco-900/20">
+            <div class="grid grid-cols-1 gap-4">
+                <div>
+                    <label class="text-[11px] text-coco-300/70 uppercase font-bold tracking-wider mb-1.5 block">Nama Toko</label>
+                    <input type="text" id="inputStoreName" value="HALOCOKO" class="w-full bg-coco-950 border border-coco-700/50 rounded-lg px-4 py-3 text-sm text-white focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none placeholder-coco-700/50 transition-all">
+                </div>
+                <div>
+                    <label class="text-[11px] text-coco-300/70 uppercase font-bold tracking-wider mb-1.5 block">Lokasi Toko</label>
+                    <input type="text" id="inputStoreLoc" value="INKA 3 Indramayu" class="w-full bg-coco-950 border border-coco-700/50 rounded-lg px-4 py-3 text-sm text-white focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none placeholder-coco-700/50 transition-all">
+                </div>
+            </div>
+        </div>
+
+        <div id="cartList" class="flex-1 overflow-y-auto px-5 py-4 scrollbar-hide"></div>
+        <div id="cartEmpty" class="flex-1 flex items-center justify-center"><div class="text-center text-coco-200/25"><i class="fas fa-bag-shopping text-4xl mb-3"></i><p class="text-sm">Belum ada pesanan</p></div></div>
+        <div id="cartFoot" class="hidden border-t border-coco-800/20 px-5 py-5 bg-coco-900/40">
+            <div class="flex justify-between text-base mb-2">
+                <span class="text-coco-200/60">Total Bayar</span>
+                <span id="cTotal" class="text-coco-50 font-bold text-lg">Rp 0</span>
+            </div>
+            <button onclick="sendWA()" class="w-full py-3.5 bg-green-600 hover:bg-green-500 text-white rounded-xl font-bold text-base mt-3 transition-colors flex items-center justify-center gap-2 shadow-lg shadow-green-900/20">
+                <i class="fab fa-whatsapp text-lg"></i> Kirim Pesanan
             </button>
-            <button onclick="clearCart()" class="w-full py-1.5 text-coco-200/30 hover:text-brand-300 text-[11px] mt-1 transition-colors">Kosongkan keranjang</button>
+            <button onclick="clearCart()" class="w-full py-2 text-coco-200/30 hover:text-brand-300 text-xs mt-2 transition-colors">Hapus Semua Item</button>
         </div>
     </div>
 </div>
@@ -168,7 +179,7 @@ const PROD=[
     {id:7,n:'Tiramisu Cookies',p:124000,c:'deluxe',t:'Rp 4.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/bb643af1-c631-46fe-bb6a-24f46f80cb28.jpg?auth_key=1876335412-ba2693ea72f14b91a577e1b97d0c6c26-0-06913ebc79a8f6030b11d7f6cad5a994'},
     {id:8,n:'143 Cup Strawberry',p:93000,c:'classic',t:'Rp 3.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/07363091-6b17-4803-9880-1c312ab1b731.jpg?auth_key=1876334364-65da03e916f549049a2381e779556dfd-0-8b47c2fa4b821e9d644cbc610d6ff113'},
     {id:9,n:'KaKaKres Cokelat',p:92800,c:'classic',t:'Rp 3.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/cabf45ec-7fbf-4842-83bc-1beebf1d3261.jpg?auth_key=1876333067-b63f6b52de904252939281f30bd65fa4-0-17b85dfefc88766a7a45706bbafc9622'},
-    {id:10,n:'PisCok Krispi',p:92800,c:'classic',t:'Rp 3.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/b9fe4075-b451-4192-ada6-6fd6f17f22b7.jpg?auth_key=1876334364-22cf08a988c2473faad2ce4c7f995849-0-6c353834c09bf33113bb5f280beecc33'},
+    {id:10,n:'PisCok Krispi',p:92800,c:'classic',t:'Rp 3.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/b9fe4075-b451-4192-ada6-6fd6f17f22b7.jpg?auth_key=1876334364-22cf08a988c2473faad2ce4c7f998849-0-6c353834c09bf33113bb5f280beecc33'},
     {id:11,n:'Tiger Choco',p:92800,c:'classic',t:'Rp 3.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/665cda64-8ea9-4b7d-b2b5-b738ac84cf5f.jpg?auth_key=1876333067-df24c5f11ca744d9a7cfd76b117f2e54-0-7bdea144aebbd6bacb04c4cfb5a5ed6e'},
     {id:12,n:'Red Zebra Choco',p:92800,c:'classic',t:'Rp 3.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/b8f0857c-4a5a-411e-8c5b-7ea7a7273d1b.jpg?auth_key=1876335412-d077e1940ec14e17bc1ce9d5903f7d54-0-4914a0730bc79fe01655b29554504d34'},
     {id:13,n:'SuKoCo Kopi',p:93000,c:'special',t:'Rp 2.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/0da0039b-6de6-49f6-83c2-2d2d0a081d56.jpg?auth_key=1876333067-c0f8f56ae397442bbfc77f89dc5ae9be-0-da3a577601d5e11972684bc502a89d11'},
@@ -194,23 +205,23 @@ let cart={},curCat='all';
 
 function toast(m){
     const c=document.getElementById('toasts'),d=document.createElement('div');
-    d.className='toast-in pointer-events-auto px-3 py-2 bg-coco-900 border border-coco-800/30 rounded-lg text-xs text-coco-100 shadow-xl flex items-center gap-2';
-    d.innerHTML=`<i class="fas fa-check-circle text-green-400 text-[10px]"></i>${m}`;
+    d.className='toast-in pointer-events-auto px-4 py-3 bg-coco-900 border border-coco-800/30 rounded-xl text-sm text-coco-100 shadow-xl flex items-center gap-3';
+    d.innerHTML=`<i class="fas fa-check-circle text-green-400 text-sm"></i>${m}`;
     c.appendChild(d);
     setTimeout(()=>{d.classList.replace('toast-in','toast-out');setTimeout(()=>d.remove(),200)},1500);
 }
 
 function renderTabs(){
     document.getElementById('tabs').innerHTML=CATS.map(c=>
-        `<button onclick="setCat('${c.id}')" class="tab-b flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-transparent text-xs font-medium text-coco-200/50 hover:text-coco-100 ${curCat===c.id?'on':''}">
-            <i class="fas ${c.ic} text-[10px]"></i>${c.n}${c.t?`<span class="hidden sm:inline text-[9px] opacity-40">${c.t}</span>`:''}
+        `<button onclick="setCat('${c.id}')" class="tab-b flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-lg border border-transparent text-xs font-medium text-coco-200/60 hover:text-coco-100 ${curCat===c.id?'on':''}">
+            <i class="fas ${c.ic} text-xs"></i>${c.n}${c.t?`<span class="hidden sm:inline text-[10px] opacity-40 ml-1">${c.t}</span>`:''}
         </button>`).join('');
 }
 function setCat(id){curCat=id;renderTabs();renderGrid();}
 
 function imgHTML(p){
     if(p.img) return `<img src="${p.img}" alt="${p.n}" class="prod-img w-full h-full" loading="lazy">`;
-    return `<div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-coco-800/20 to-coco-900/20"><i class="fas fa-ice-cream text-2xl text-coco-700/30"></i></div>`;
+    return `<div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-coco-800/20 to-coco-900/20"><i class="fas fa-ice-cream text-3xl text-coco-700/30"></i></div>`;
 }
 
 function renderGrid(){
@@ -218,22 +229,22 @@ function renderGrid(){
     const list=curCat==='all'?PROD:PROD.filter(p=>p.c===curCat);
     g.innerHTML=list.map((p,i)=>{
         const q=cart[p.id]||0,sel=q>0,m=META[p.c];
-        return `<div id="c${p.id}" class="card bg-coco-900/70 rounded-xl overflow-hidden border ${sel?'border-brand-600/50':'border-coco-800/15'} anim-up" style="animation-delay:${i*30}ms">
+        return `<div id="c${p.id}" class="card bg-coco-900/70 rounded-2xl overflow-hidden border ${sel?'border-brand-600/50':'border-coco-800/15'} anim-up" style="animation-delay:${i*30}ms">
             <div class="aspect-[4/3] overflow-hidden relative">
                 ${imgHTML(p)}
-                <span class="absolute top-1.5 left-1.5 text-[9px] px-1.5 py-0.5 rounded bg-black/60 backdrop-blur-sm text-coco-300/70 font-medium">${m.e} ${m.l}</span>
-                <span id="cb${p.id}" class="${sel?'absolute top-1.5 right-1.5 w-5 h-5 rounded-full bg-brand-500 text-white text-[9px] font-bold flex items-center justify-center':'hidden'}">${sel?q:''}</span>
+                <span class="absolute top-2 left-2 text-[10px] px-2 py-0.5 rounded-md bg-black/70 backdrop-blur-sm text-coco-300/80 font-medium tracking-wide">${m.e} ${m.l}</span>
+                <span id="cb${p.id}" class="${sel?'absolute top-2 right-2 min-w-[20px] h-5 px-1 rounded-full bg-brand-500 text-white text-[10px] font-bold flex items-center justify-center':'hidden'}">${sel?q:''}</span>
             </div>
-            <div class="p-2.5">
-                <span class="text-[9px] px-1.5 py-0.5 rounded bg-brand-900/20 text-brand-300/50 font-medium">${p.t}</span>
-                <h3 class="font-semibold text-coco-50 text-xs mt-1 truncate">${p.n}</h3>
-                <p class="text-coco-300 font-bold text-sm my-1.5">${fmt(p.p)}</p>
-                <div class="flex items-center justify-center gap-2.5">
-                    <button id="mn${p.id}" onclick="chg(${p.id},-1)" class="w-7 h-7 rounded-md ${q>0?'bg-coco-800 text-coco-200 hover:text-red-400':'bg-coco-800/40 text-coco-200/20'} flex items-center justify-center transition-colors"><i class="fas fa-minus text-[9px]"></i></button>
-                    <span id="q${p.id}" class="text-coco-50 font-semibold text-sm w-4 text-center">${q}</span>
-                    <button onclick="chg(${p.id},1)" class="w-7 h-7 rounded-md bg-brand-700/30 text-brand-300 hover:bg-brand-700/50 flex items-center justify-center transition-colors"><i class="fas fa-plus text-[9px]"></i></button>
+            <div class="p-3">
+                <span class="text-[10px] px-2 py-0.5 rounded bg-brand-900/20 text-brand-300/60 font-medium tracking-wide">${p.t}</span>
+                <h3 class="font-bold text-coco-50 text-sm mt-1.5 leading-tight truncate">${p.n}</h3>
+                <p class="text-coco-300 font-bold text-base my-2">${fmt(p.p)}</p>
+                <div class="flex items-center justify-center gap-3">
+                    <button id="mn${p.id}" onclick="chg(${p.id},-1)" class="w-9 h-9 rounded-lg ${q>0?'bg-coco-800 text-coco-200 hover:text-red-400':'bg-coco-800/40 text-coco-200/30'} flex items-center justify-center transition-colors"><i class="fas fa-minus text-xs"></i></button>
+                    <span id="q${p.id}" class="text-coco-50 font-bold text-base w-5 text-center">${q}</span>
+                    <button onclick="chg(${p.id},1)" class="w-9 h-9 rounded-lg bg-brand-700/30 text-brand-300 hover:bg-brand-700/50 flex items-center justify-center transition-colors"><i class="fas fa-plus text-xs"></i></button>
                 </div>
-                <p id="s${p.id}" class="text-center text-[10px] text-brand-300/60 font-medium mt-1 ${sel?'':'hidden'}">${sel?fmt(p.p*q):''}</p>
+                <p id="s${p.id}" class="text-center text-[11px] text-brand-300/70 font-bold mt-1.5 ${sel?'':'hidden'}">${sel?fmt(p.p*q):''}</p>
             </div>
         </div>`;
     }).join('');
@@ -253,11 +264,11 @@ function chg(id,d){
     qEl.classList.add('pop');setTimeout(()=>qEl.classList.remove('pop'),200);
     sEl.classList.toggle('hidden',!has);
     if(has)sEl.textContent=fmt(p.p*q);
-    if(has){badge.className='absolute top-1.5 right-1.5 w-5 h-5 rounded-full bg-brand-500 text-white text-[9px] font-bold flex items-center justify-center';badge.textContent=q;}
+    if(has){badge.className='absolute top-2 right-2 min-w-[20px] h-5 px-1 rounded-full bg-brand-500 text-white text-[10px] font-bold flex items-center justify-center';badge.textContent=q;}
     else{badge.className='hidden';}
     card.classList.toggle('border-brand-600/50',has);
     card.classList.toggle('border-coco-800/15',!has);
-    mn.className=`w-7 h-7 rounded-md ${has?'bg-coco-800 text-coco-200 hover:text-red-400':'bg-coco-800/40 text-coco-200/20'} flex items-center justify-center transition-colors`;
+    mn.className=`w-9 h-9 rounded-lg ${has?'bg-coco-800 text-coco-200 hover:text-red-400':'bg-coco-800/40 text-coco-200/30'} flex items-center justify-center transition-colors`;
     updBadge();
     if(has&&d>0)toast(`${p.n} +1`);
 }
@@ -295,21 +306,21 @@ function renderCartList(){
     let html='',total=0;
     Object.entries(grouped).forEach(([cat,items])=>{
         const m=META[cat];
-        html+=`<div class="mb-3"><p class="text-[10px] font-semibold text-coco-300/40 uppercase tracking-wider mb-1.5">${m.e} ${m.l} — ${items[0].t}</p>`;
+        html+=`<div class="mb-4"><p class="text-[11px] font-bold text-coco-300/40 uppercase tracking-wider mb-2">${m.e} ${m.l} — ${items[0].t}</p>`;
         items.forEach(it=>{
             total+=it.p*it.qty;
-            html+=`<div class="flex items-center gap-2 p-2 rounded-lg bg-coco-900/50 border border-coco-800/10 mb-1.5">
-                ${it.img?`<img src="${it.img}" alt="" class="w-9 h-9 rounded-md object-cover flex-shrink-0">`:`<div class="w-9 h-9 rounded-md bg-coco-800/30 flex items-center justify-center flex-shrink-0"><i class="fas fa-ice-cream text-coco-700/40 text-xs"></i></div>`}
+            html+=`<div class="flex items-center gap-3 p-3 rounded-xl bg-coco-900/50 border border-coco-800/10 mb-2">
+                ${it.img?`<img src="${it.img}" alt="" class="w-12 h-12 rounded-lg object-cover flex-shrink-0">`:`<div class="w-12 h-12 rounded-lg bg-coco-800/30 flex items-center justify-center flex-shrink-0"><i class="fas fa-ice-cream text-coco-700/40 text-lg"></i></div>`}
                 <div class="flex-1 min-w-0">
-                    <p class="text-coco-50 text-xs font-medium truncate">${it.n}</p>
-                    <p class="text-coco-200/30 text-[10px]">${fmt(it.p)} × ${it.qty}</p>
+                    <p class="text-coco-50 text-sm font-bold truncate">${it.n}</p>
+                    <p class="text-coco-200/40 text-xs">${fmt(it.p)} × ${it.qty}</p>
                 </div>
-                <div class="flex items-center gap-1 bg-coco-800/50 rounded px-0.5 py-0.5">
-                    <button onclick="cChg(${it.id},-1)" class="w-5 h-5 rounded flex items-center justify-center text-coco-200/40 hover:text-red-400 text-[9px]"><i class="fas fa-minus"></i></button>
-                    <span class="text-coco-50 text-[11px] font-semibold w-3 text-center">${it.qty}</span>
-                    <button onclick="cChg(${it.id},1)" class="w-5 h-5 rounded flex items-center justify-center text-coco-200/40 hover:text-brand-300 text-[9px]"><i class="fas fa-plus"></i></button>
+                <div class="flex items-center gap-1.5 bg-coco-800/60 rounded-lg px-1.5 py-1">
+                    <button onclick="cChg(${it.id},-1)" class="w-7 h-7 rounded flex items-center justify-center text-coco-200/40 hover:text-red-400 text-xs"><i class="fas fa-minus"></i></button>
+                    <span class="text-coco-50 text-sm font-bold w-4 text-center">${it.qty}</span>
+                    <button onclick="cChg(${it.id},1)" class="w-7 h-7 rounded flex items-center justify-center text-coco-200/40 hover:text-brand-300 text-xs"><i class="fas fa-plus"></i></button>
                 </div>
-                <span class="text-coco-300 text-[11px] font-semibold w-16 text-right">${fmt(it.p*it.qty)}</span>
+                <span class="text-coco-300 text-sm font-bold w-20 text-right">${fmt(it.p*it.qty)}</span>
             </div>`;
         });
         html+='</div>';
@@ -323,23 +334,35 @@ function cChg(id,d){chg(id,d);renderCartList();}
 function sendWA(){
     const entries=Object.entries(cart);
     if(!entries.length)return;
-    const now=new Date();
-    const ds=now.toLocaleDateString('id-ID',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-    const ts=now.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
-    let m='🍦 *HALOCOKO — Nota Pemesanan*\n━━━━━━━━━━━━━━━━━━━\n\n';
-    m+=`📅 ${ds}\n🕐 ${ts} WIB\n\n📋 *Detail Pesanan:*\n\n`;
-    const grouped={};
-    entries.forEach(([id,qty])=>{const p=PROD.find(x=>x.id===+id);if(!p)return;if(!grouped[p.c])grouped[p.c]=[];grouped[p.c].push({...p,qty});});
-    let num=1,totQ=0,totP=0;
-    Object.entries(grouped).forEach(([cat,items])=>{
-        const m2=META[cat];
-        m+=`━━ ${m2.e} *${m2.l}* (${items[0].t}) ━━\n\n`;
-        items.forEach(it=>{const sub=it.p*it.qty;m+=`${num}. *${it.n}*\n   ${fmt(it.p)} × ${it.qty} pcs = *${fmt(sub)}*\n\n`;num++;totQ+=it.qty;totP+=sub;});
+
+    const namaToko = document.getElementById('inputStoreName').value.trim();
+    const lokasiToko = document.getElementById('inputStoreLoc').value.trim();
+    
+    let message = `*NOTA PEMESANAN ICE CREAM*\n`;
+    message += `-------------------------------------------------------\n`;
+    message += `*Nama Toko :* ${namaToko}\n`;
+    message += `*Lokasi Toko :* ${lokasiToko}\n`;
+    message += `-------------------------------------------------------\n`;
+    message += `*Detail & Total Pemesanan :*\n`;
+
+    let totalHarga = 0;
+    const sortedEntries = entries.sort((a, b) => parseInt(a[0]) - parseInt(b[0]));
+
+    sortedEntries.forEach(([id, qty]) => {
+        const p = PROD.find(x => x.id == id);
+        if(p) {
+            message += `-  ${p.n} ${qty}\n`;
+            totalHarga += p.p * qty;
+        }
     });
-    m+='━━━━━━━━━━━━━━━━━━━\n';
-    m+=`📦 Total : ${totQ} pcs\n💰 *Bayar : ${fmt(totP)}*\n━━━━━━━━━━━━━━━━━━━\n\n`;
-    m+='Mohon konfirmasi pesanan ini 🙏\nTerima kasih! — HALOCOKO INKA 3 Indramayu 🍦';
-    window.open('https://wa.me/6289527286569?text='+encodeURIComponent(m),'_blank');
+
+    message += `\n\n`; 
+    message += `-------------------------------------------------------\n`;
+    message += `*Jumlah Harga :* ${fmt(totalHarga)}\n`;
+    message += `-------------------------------------------------------\n`;
+    message += `*Mohon Konfirmasi Pesanan Ini, Terimakasih!🙏*`;
+
+    window.open('https://wa.me/6289527286569?text='+encodeURIComponent(message),'_blank');
     setTimeout(()=>closeCart(),400);
 }
 
