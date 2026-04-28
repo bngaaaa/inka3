@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HALOCOKO - Chocolate Ice Cream | INKA 3 Indramayu</title>
+    <title>HALOCOKO - Chocolate Ice Cream</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -12,8 +12,32 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { 50:'#fef2f2',100:'#fee2e2',200:'#fca5a5',300:'#f87171',400:'#ef4444',500:'#dc2626',600:'#b91c1c',700:'#991b1b',800:'#7f1d1d',900:'#450a0a' },
-                        coco: { 50:'#fdf8f0',100:'#f5e6d0',200:'#e0c8a0',300:'#c9a56c',400:'#b08840',500:'#8a6530',600:'#6b4d24',700:'#4a3518',800:'#2e1f0e',900:'#1a120a',950:'#100a05' }
+                        // Palette Family Friendly
+                        brand: { 
+                            50:'#fff7ed', 
+                            100:'#ffedd5', 
+                            200:'#fed7aa', 
+                            300:'#fdba74', 
+                            400:'#fb923c', 
+                            500:'#f97316', 
+                            600:'#ea580c', 
+                            700:'#c2410c', 
+                            800:'#9a3412', 
+                            900:'#7c2d12' 
+                        },
+                        coco: { 
+                            50:'#fffbeb', 
+                            100:'#fef3c7', 
+                            200:'#fde68a', 
+                            300:'#fcd34d', 
+                            400:'#fbbf24', 
+                            500:'#f59e0b', 
+                            600:'#d97706', 
+                            700:'#b45309', 
+                            800:'#92400e', 
+                            900:'#78350f',
+                            950:'#451a03'
+                        }
                     },
                     fontFamily: { jakarta:['Plus Jakarta Sans','sans-serif'] }
                 }
@@ -21,178 +45,215 @@
         }
     </script>
     <style>
-        body{font-family:'Plus Jakarta Sans',sans-serif;background:#100a05}
+        body{font-family:'Plus Jakarta Sans',sans-serif;background-color:#fffbeb; color:#451a03;}
         .scrollbar-hide::-webkit-scrollbar{display:none}
         .scrollbar-hide{-ms-overflow-style:none;scrollbar-width:none}
+        
         @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
         @keyframes slideR{from{transform:translateX(100%)}to{transform:translateX(0)}}
         @keyframes slideOut{from{transform:translateX(0)}to{transform:translateX(100%)}}
-        @keyframes toastIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
-        @keyframes toastOut{from{opacity:1}to{opacity:0;transform:translateY(-10px)}}
+        @keyframes toastIn{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes toastOut{from{opacity:1}to{opacity:0;transform:translateY(-20px)}}
         @keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.2)}100%{transform:scale(1)}}
-        @keyframes glow{0%,100%{filter:drop-shadow(0 0 20px rgba(220,38,38,.2))}50%{filter:drop-shadow(0 0 35px rgba(220,38,38,.35))}}
+        @keyframes bounce-slow{0%, 100%{transform:translateY(-5%);} 50%{transform:translateY(0);}}
+
         .anim-up{animation:fadeUp .45s ease-out both}
         .slide-r{animation:slideR .3s cubic-bezier(.16,1,.3,1) forwards}
         .slide-out{animation:slideOut .25s ease-in forwards}
-        .toast-in{animation:toastIn .25s ease-out forwards}
+        .toast-in{animation:toastIn .3s cubic-bezier(.175,.885,.32,1.275) forwards}
         .toast-out{animation:toastOut .2s ease-in forwards}
         .pop{animation:pop .2s ease}
-        .logo-glow{animation:glow 3s ease-in-out infinite}
-        .card{transition:transform .2s,box-shadow .2s,border-color .2s}
-        .card:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,0,0,.4)}
+        
+        .card{transition:all .3s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid #fde68a;}
+        .card:hover{transform:translateY(-4px);box-shadow:0 12px 24px -8px rgba(180, 83, 9, 0.15); border-color:#fb923c;}
+        
         .tab-b{transition:all .2s}
-        .tab-b.on{background:rgba(220,38,38,.15);color:#f87171;border-color:rgba(220,38,38,.3)}
-        .prod-img{object-fit:cover;transition:transform .3s}
-        .card:hover .prod-img{transform:scale(1.05)}
+        .tab-b.on{background:rgba(249, 115, 22, 0.15);color:#ea580c;border-color:#fdba74; background-color: #fff7ed;}
+        
+        .prod-img{object-fit:cover;transition:transform .4s ease-in-out;}
+        .card:hover .prod-img{transform:scale(1.08);}
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(251, 191, 36, 0.3);
+        }
     </style>
 </head>
-<body class="text-coco-100 font-jakarta min-h-screen">
+<body class="text-coco-900 font-jakarta min-h-screen selection:bg-brand-200 selection:text-coco-900">
 
-<div id="toasts" class="fixed top-4 left-1/2 -translate-x-1/2 z-[200] flex flex-col gap-2 pointer-events-none"></div>
+<!-- Toast Container -->
+<div id="toasts" class="fixed top-4 left-1/2 -translate-x-1/2 z-[200] flex flex-col gap-2 pointer-events-none w-full max-w-xs px-4"></div>
 
 <!-- Navbar -->
-<nav class="fixed top-0 w-full z-50 bg-coco-950/95 backdrop-blur-lg border-b border-brand-900/20">
-    <div class="max-w-xl mx-auto px-4 h-16 flex items-center justify-between"> <!-- max-w-xl untuk tampilan fokus HP -->
+<nav class="fixed top-0 w-full z-50 glass-panel shadow-sm">
+    <div class="max-w-xl mx-auto px-4 h-16 flex items-center justify-between">
         <div class="flex items-center gap-3">
-            <img src="https://z-cdn-media.chatglm.cn/files/4eb3eae2-a8b3-4ba2-91b0-38f754547d86.png?auth_key=1876332664-95accd10cf2c4881aeec879f19c643cf-0-174c0c0e8e2ee162413e913b884b8889" alt="HALOCOKO" class="h-10 w-auto object-contain flex-shrink-0">
-            <div class="block">
-                <p class="text-coco-100 font-bold text-base leading-tight">HALOCOKO</p>
-                <p class="text-brand-400/60 text-[11px] font-medium tracking-wider">INKA 3 INDARAMAYU</p>
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-brand-400 to-brand-600 p-0.5 shadow-md">
+                <img src="https://z-cdn-media.chatglm.cn/files/4eb3eae2-a8b3-4ba2-91b0-38f754547d86.png?auth_key=1876332664-95accd10cf2c4881aeec879f19c643cf-0-174c0c0e8e2ee162413e913b884b8889" alt="HALOCOKO" class="w-full h-full object-contain bg-white rounded-full p-1">
+            </div>
+            <div class="block overflow-hidden">
+                <p id="displayNavName" class="text-brand-600 font-extrabold text-base leading-tight truncate transition-colors">Masukan Nama Toko Anda</p>
+                <p id="displayNavLoc" class="text-coco-500 text-[11px] font-medium tracking-wide truncate transition-colors">Masukan Lokasi Toko Anda/p>
             </div>
         </div>
         <div class="flex items-center gap-3">
-            <a href="#menu" class="hidden sm:block text-xs text-coco-200/60 hover:text-coco-100 transition-colors">Menu</a>
-            <button onclick="openCart()" class="relative w-10 h-10 rounded-lg bg-coco-900 border border-coco-800/30 flex items-center justify-center text-coco-200 hover:text-brand-300 hover:border-brand-800/40 transition-all">
-                <i class="fas fa-bag-shopping text-sm"></i>
-                <span id="nBadge" class="hidden absolute -top-1 -right-1 min-w-[18px] h-5 rounded-full bg-brand-500 text-white text-[10px] font-bold flex items-center justify-center px-1">0</span>
+            <a href="#menu" class="hidden sm:block text-xs font-semibold text-coco-500 hover:text-brand-500 transition-colors">Menu</a>
+            <button onclick="openCart()" class="relative w-10 h-10 rounded-full bg-white border border-coco-200 text-coco-700 hover:text-brand-500 hover:border-brand-300 shadow-sm flex items-center justify-center transition-all">
+                <i class="fas fa-bag-shopping"></i>
+                <span id="nBadge" class="hidden absolute -top-1 -right-1 min-w-[18px] h-5 rounded-full bg-brand-500 text-white text-[10px] font-bold flex items-center justify-center px-1 shadow-sm">0</span>
             </button>
         </div>
     </div>
 </nav>
 
-<!-- Hero -->
-<section class="pt-20 pb-6 px-4">
-    <div class="max-w-xl mx-auto text-center py-6">
-        <div class="flex justify-center mb-6 anim-up">
-            <img src="https://z-cdn-media.chatglm.cn/files/4eb3eae2-a8b3-4ba2-91b0-38f754547d86.png?auth_key=1876332664-95accd10cf2c4881aeec879f19c643cf-0-174c0c0e8e2ee162413e913b884b8889" alt="HALOCOKO Logo" class="w-64 h-auto object-contain logo-glow">
+<!-- Hero Section -->
+<section class="pt-24 pb-8 px-4 bg-gradient-to-b from-brand-50 to-coco-50">
+    <div class="max-w-xl mx-auto text-center py-8">
+        <div class="flex justify-center mb-6 anim-up" style="animation-delay:0.1s">
+            <img src="https://z-cdn-media.chatglm.cn/files/4eb3eae2-a8b3-4ba2-91b0-38f754547d86.png?auth_key=1876332664-95accd10cf2c4881aeec879f19c643cf-0-174c0c0e8e2ee162413e913b884b8889" alt="HALOCOKO Logo" class="w-48 h-auto drop-shadow-xl" style="animation: bounce-slow 3s infinite ease-in-out;">
         </div>
-        <p class="text-brand-400 text-xs font-bold tracking-[.25em] uppercase mb-2 anim-up" style="animation-delay:.05s">INKA 3 INDARAMAYU</p>
-        <p class="text-coco-200/60 text-sm mb-6 anim-up" style="animation-delay:.1s">Es krim cokelat premium untuk keluarga — lembut, nikmat, halal.</p>
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 anim-up" style="animation-delay:.15s">
-            <a href="#menu" class="w-full sm:w-auto px-8 py-3 bg-brand-600 hover:bg-brand-500 text-white rounded-lg font-bold text-base transition-colors flex items-center justify-center gap-2">
-                <i class="fas fa-ice-cream text-sm"></i> Pesan Sekarang
+        
+        <h1 id="displayHeroName" class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-brand-400 mb-2 anim-up leading-tight" style="animation-delay:0.2s">Masukan Nama Toko Anda</h1>
+        <p id="displayHeroLoc" class="text-coco-500 text-sm font-semibold mb-4 anim-up" style="animation-delay:0.25s">Masukan Lokasi Toko Anda</p>
+        
+        <p class="text-coco-700/80 text-sm mb-8 max-w-md mx-auto anim-up leading-relaxed" style="animation-delay:0.3s">
+            Es krim cokelat premium pilihan keluarga. Lembut, nikmat, halal, dan membuat momen bahagia Anda lebih manis.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 anim-up" style="animation-delay:0.35s">
+            <a href="#menu" class="w-full sm:w-auto px-8 py-3 bg-brand-500 hover:bg-brand-600 text-white rounded-full font-bold text-base shadow-lg shadow-brand-500/30 transition-all transform hover:scale-105 active:scale-95 flex items-center justify-center gap-2">
+                <i class="fas fa-ice-cream"></i> Pesan Sekarang
             </a>
-            <a href="https://wa.me/6282241489084" target="_blank" class="w-full sm:w-auto px-8 py-3 bg-coco-900 border border-coco-800/30 text-coco-200 hover:text-coco-100 hover:border-coco-700/40 rounded-lg font-bold text-base transition-all flex items-center justify-center gap-2">
-                <i class="fab fa-whatsapp text-green-500 text-sm"></i> Hubungi Kami
+            <a href="https://wa.me/6282241489084" target="_blank" class="w-full sm:w-auto px-8 py-3 bg-white border-2 border-coco-200 text-coco-700 hover:border-brand-400 hover:text-brand-600 rounded-full font-bold text-base transition-all flex items-center justify-center gap-2">
+                <i class="fab fa-whatsapp text-green-500 text-lg"></i> Chat Kami
             </a>
         </div>
     </div>
 </section>
 
-<!-- Menu -->
-<section id="menu" class="max-w-xl mx-auto px-4 pb-20">
-    <div class="flex items-center justify-between mb-4">
-        <h2 class="text-2xl font-bold text-coco-50">Daftar Menu</h2>
-        <p class="text-xs text-coco-200/40">Tap + untuk menambah</p>
+<!-- Menu Section -->
+<section id="menu" class="max-w-xl mx-auto px-4 pb-24">
+    <div class="flex items-center justify-between mb-5">
+        <h2 class="text-xl font-bold text-coco-900 flex items-center gap-2">
+            <span class="w-1.5 h-6 bg-brand-500 rounded-full"></span>
+            Daftar Menu Favorit
+        </h2>
+        <div class="text-[10px] bg-brand-100 text-brand-700 px-2 py-1 rounded-md font-bold">Ketuk + untuk pesan</div>
     </div>
-    <div id="tabs" class="flex gap-2 overflow-x-auto pb-3 mb-4 scrollbar-hide -mx-4 px-4"></div>
-    <div id="grid" class="grid grid-cols-2 gap-3"></div>
+
+    <!-- Tabs -->
+    <div id="tabs" class="flex gap-2 overflow-x-auto pb-4 mb-4 scrollbar-hide -mx-4 px-4 sticky top-16 z-10 py-2 bg-coco-50/95 backdrop-blur-sm"></div>
+    
+    <!-- Grid -->
+    <div id="grid" class="grid grid-cols-2 gap-4"></div>
 </section>
 
 <!-- Footer -->
-<footer class="border-t border-coco-800/15 py-6 px-4">
-    <div class="max-w-xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-        <div class="flex items-center gap-3">
-            <img src="https://z-cdn-media.chatglm.cn/files/4eb3eae2-a8b3-4ba2-91b0-38f754547d86.png?auth_key=1876332664-95accd10cf2c4881aeec879f19c643cf-0-174c0c0e8e2ee162413e913b884b8889" alt="HALOCOKO" class="h-8 w-auto object-contain">
-            <span class="text-coco-200/30 text-xs">© 2025 - 2026 HALOCOKO — INKA 3 Indramayu</span>
+<footer class="bg-white border-t border-coco-100 py-8 px-4 mt-8">
+    <div class="max-w-xl mx-auto flex flex-col items-center justify-center gap-4 text-center">
+        <div class="w-12 h-12 mb-2">
+             <img src="https://z-cdn-media.chatglm.cn/files/4eb3eae2-a8b3-4ba2-91b0-38f754547d86.png?auth_key=1876332664-95accd10cf2c4881aeec879f19c643cf-0-174c0c0e8e2ee162413e913b884b8889" alt="Logo" class="w-full h-full object-contain opacity-80">
         </div>
-        <a href="https://wa.me/6282241489084" target="_blank" class="text-brand-400/60 hover:text-brand-300 text-xs flex items-center gap-1.5 transition-colors">
-            <i class="fab fa-whatsapp"></i> +62-822-4148-9084
-        </a>
+        <h3 id="displayFooterName" class="font-bold text-coco-900">Masukan Nama Toko Anda</h3>
+        <p class="text-coco-400 text-xs">© 2025 Halal & Fresh Ice Cream</p>
     </div>
 </footer>
 
 <!-- FAB -->
-<button id="fab" onclick="openCart()" class="fixed bottom-6 right-6 z-50 hidden w-14 h-14 rounded-full bg-brand-600 text-white shadow-lg shadow-brand-600/40 flex items-center justify-center hover:bg-brand-500 transition-colors">
-    <i class="fas fa-bag-shopping text-lg"></i>
-    <span id="fBadge" class="hidden absolute -top-1 -right-1 min-w-[18px] h-5 rounded-full bg-white text-brand-600 text-[10px] font-bold flex items-center justify-center px-1">0</span>
+<button id="fab" onclick="openCart()" class="fixed bottom-6 right-6 z-50 hidden w-14 h-14 rounded-full bg-brand-600 text-white shadow-xl shadow-brand-600/40 flex items-center justify-center hover:bg-brand-500 hover:scale-110 transition-all duration-300">
+    <i class="fas fa-shopping-bag text-xl"></i>
+    <span id="fBadge" class="hidden absolute -top-1 -right-1 min-w-[18px] h-5 rounded-full bg-white text-brand-600 text-[10px] font-bold flex items-center justify-center px-1 border border-brand-100">0</span>
 </button>
 
-<!-- Cart -->
+<!-- Cart Overlay -->
 <div id="cartOv" class="fixed inset-0 z-[60] hidden">
-    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeCart()"></div>
-    <div id="cartP" class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-coco-950 border-l border-coco-800/20 flex flex-col shadow-2xl">
-        <div class="flex items-center gap-3 px-5 py-4 border-b border-coco-800/20 bg-coco-900/30">
-            <img src="https://z-cdn-media.chatglm.cn/files/4eb3eae2-a8b3-4ba2-91b0-38f754547d86.png?auth_key=1876332664-95accd10cf2c4881aeec879f19c643cf-0-174c0c0e8e2ee162413e913b884b8889" alt="" class="h-8 w-auto object-contain">
-            <h3 class="font-bold text-coco-50 text-base flex-1">Keranjang</h3>
-            <button onclick="closeCart()" class="w-8 h-8 rounded-full bg-coco-800 flex items-center justify-center text-coco-200/50 hover:text-coco-100 transition-colors"><i class="fas fa-xmark text-sm"></i></button>
+    <div class="absolute inset-0 bg-coco-900/40 backdrop-blur-sm transition-opacity" onclick="closeCart()"></div>
+    
+    <div id="cartP" class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-white shadow-2xl flex flex-col transform transition-transform duration-300">
+        <div class="flex items-center gap-3 px-5 py-4 border-b border-coco-100 bg-coco-50">
+            <div class="w-8 h-8 rounded-lg bg-brand-100 flex items-center justify-center text-brand-600">
+                <i class="fas fa-shopping-bag"></i>
+            </div>
+            <h3 class="font-bold text-coco-900 text-lg flex-1">Keranjang Belanja</h3>
+            <button onclick="closeCart()" class="w-8 h-8 rounded-full bg-white border border-coco-200 flex items-center justify-center text-coco-400 hover:text-red-500 hover:border-red-200 transition-colors shadow-sm"><i class="fas fa-times"></i></button>
         </div>
         
-        <!-- Input Menu: Nama Toko & Lokasi Toko (Diperbesar) -->
-        <div class="px-5 py-4 border-b border-coco-800/20 bg-coco-900/20">
+        <div class="px-5 py-5 border-b border-coco-100 bg-white">
             <div class="grid grid-cols-1 gap-4">
-                <div>
-                    <label class="text-[11px] text-coco-300/70 uppercase font-bold tracking-wider mb-1.5 block">Nama Toko</label>
-                    <input type="text" id="inputStoreName" value="HALOCOKO" class="w-full bg-coco-950 border border-coco-700/50 rounded-lg px-4 py-3 text-sm text-white focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none placeholder-coco-700/50 transition-all">
+                <div class="relative">
+                    <label class="text-[10px] text-brand-500 font-bold uppercase tracking-widest mb-1 block">Nama Toko</label>
+                    <div class="flex items-center">
+                        <i class="fas fa-store absolute left-3 text-coco-300 text-sm"></i>
+                        <input type="text" id="inputStoreName" placeholder="Masukan Nama Toko Anda" class="w-full bg-coco-50 border border-coco-200 rounded-xl pl-9 pr-4 py-3 text-sm text-coco-900 placeholder-coco-400 focus:border-brand-400 focus:ring-4 focus:ring-brand-100 focus:outline-none transition-all font-medium">
+                    </div>
                 </div>
-                <div>
-                    <label class="text-[11px] text-coco-300/70 uppercase font-bold tracking-wider mb-1.5 block">Lokasi Toko</label>
-                    <input type="text" id="inputStoreLoc" value="INKA 3 Indramayu" class="w-full bg-coco-950 border border-coco-700/50 rounded-lg px-4 py-3 text-sm text-white focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none placeholder-coco-700/50 transition-all">
+                <div class="relative">
+                    <label class="text-[10px] text-brand-500 font-bold uppercase tracking-widest mb-1 block">Lokasi Toko</label>
+                    <div class="flex items-center">
+                        <i class="fas fa-map-marker-alt absolute left-3 text-coco-300 text-sm"></i>
+                        <input type="text" id="inputStoreLoc" placeholder="Masukan Lokasi Toko Anda" class="w-full bg-coco-50 border border-coco-200 rounded-xl pl-9 pr-4 py-3 text-sm text-coco-900 placeholder-coco-400 focus:border-brand-400 focus:ring-4 focus:ring-brand-100 focus:outline-none transition-all font-medium">
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div id="cartList" class="flex-1 overflow-y-auto px-5 py-4 scrollbar-hide"></div>
-        <div id="cartEmpty" class="flex-1 flex items-center justify-center"><div class="text-center text-coco-200/25"><i class="fas fa-bag-shopping text-4xl mb-3"></i><p class="text-sm">Belum ada pesanan</p></div></div>
-        <div id="cartFoot" class="hidden border-t border-coco-800/20 px-5 py-5 bg-coco-900/40">
-            <div class="flex justify-between text-base mb-2">
-                <span class="text-coco-200/60">Total Bayar</span>
-                <span id="cTotal" class="text-coco-50 font-bold text-lg">Rp 0</span>
+        <div id="cartList" class="flex-1 overflow-y-auto px-5 py-4 scrollbar-hide bg-coco-50/30"></div>
+        <div id="cartEmpty" class="flex-1 flex flex-col items-center justify-center text-coco-300">
+            <i class="fas fa-ice-cream text-5xl mb-4 opacity-30"></i>
+            <p class="text-sm font-medium">Keranjang masih kosong</p>
+            <p class="text-xs mt-1 opacity-60">Yuk pilih es krim favoritmu!</p>
+        </div>
+        <div id="cartFoot" class="hidden border-t border-coco-100 px-5 py-5 bg-white rounded-t-3xl shadow-[0_-5px_20px_rgba(0,0,0,0.05)]">
+            <div class="flex justify-between items-end mb-3">
+                <span class="text-coco-500 text-sm font-medium">Total Pembayaran</span>
+                <span id="cTotal" class="text-coco-900 font-extrabold text-2xl">Rp 0</span>
             </div>
-            <button onclick="sendWA()" class="w-full py-3.5 bg-green-600 hover:bg-green-500 text-white rounded-xl font-bold text-base mt-3 transition-colors flex items-center justify-center gap-2 shadow-lg shadow-green-900/20">
-                <i class="fab fa-whatsapp text-lg"></i> Kirim Pesanan
+            <button onclick="sendWA()" class="w-full py-3.5 bg-green-500 hover:bg-green-600 text-white rounded-xl font-bold text-base transition-all shadow-lg shadow-green-500/30 flex items-center justify-center gap-2 transform active:scale-95">
+                <i class="fab fa-whatsapp text-xl"></i> Kirim ke WhatsApp
             </button>
-            <button onclick="clearCart()" class="w-full py-2 text-coco-200/30 hover:text-brand-300 text-xs mt-2 transition-colors">Hapus Semua Item</button>
+            <button onclick="clearCart()" class="w-full py-3 text-coco-400 hover:text-red-400 text-xs font-semibold mt-2 transition-colors">Hapus Semua Item</button>
         </div>
     </div>
 </div>
 
 <script>
+// --- CONFIG & DATA ---
 const LOGO='https://z-cdn-media.chatglm.cn/files/4eb3eae2-a8b3-4ba2-91b0-38f754547d86.png?auth_key=1876332664-95accd10cf2c4881aeec879f19c643cf-0-174c0c0e8e2ee162413e913b884b8889';
 
 const CATS=[
-    {id:'all',n:'Semua',ic:'fa-grip'},
-    {id:'premium',n:'Premium',ic:'fa-crown',t:'Rp 5.000/pcs'},
-    {id:'deluxe',n:'Deluxe',ic:'fa-gem',t:'Rp 4.000/pcs'},
-    {id:'classic',n:'Classic',ic:'fa-star',t:'Rp 3.000/pcs'},
-    {id:'special',n:'Special',ic:'fa-heart',t:'Rp 2.000/pcs'},
-    {id:'kastiles',n:'KastilEs',ic:'fa-chess-rook',t:'Rp 2.000/pcs'}
+    {id:'all',n:'Semua',ic:'fa-th-large'},
+    {id:'premium',n:'Premium',ic:'fa-crown',t:'5rb'},
+    {id:'deluxe',n:'Deluxe',ic:'fa-gem',t:'4rb'},
+    {id:'classic',n:'Classic',ic:'fa-star',t:'3rb'},
+    {id:'special',n:'Special',ic:'fa-heart',t:'2rb'},
+    {id:'kastiles',n:'KastilEs',ic:'fa-chess-rook',t:'2rb'}
 ];
 
 const PROD=[
-    {id:1,n:'HaloChoco',p:158000,c:'premium',t:'Rp 5.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/a08848e8-2403-4954-9bd2-79d6b2adaeb5.jpg?auth_key=1876334364-189b4bffdea547c58d2605cadf49dc03-0-3a8d201e3d37f30a05badaeab877a900'},
-    {id:2,n:'HaloCookies',p:158000,c:'premium',t:'Rp 5.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/581e0a9e-a7fc-4184-9466-55bb4e31c8da.jpg?auth_key=1876335412-f7625ff55c40419fb7a5447a51f41056-0-ee1c339eff0ede587fe340dccb250499'},
-    {id:3,n:'Joycup Coklat',p:94800,c:'premium',t:'Rp 5.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/a460e636-0607-4502-8555-0bb7ffc94d19.jpg?auth_key=1876334364-a96f662de9c54c38b0a5fbd09e04c3db-0-c24b6ba341926f2eec8dd77fb90e24d9'},
-    {id:4,n:'23° Choco Cone',p:143000,c:'deluxe',t:'Rp 4.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/472618ef-1a38-4232-9ecd-26b0045c677d.jpg?auth_key=1876334608-517189765afd463c8a6c0ef6d6f6fd2a-0-0c9c207409d26e65f4fed1997bf4f78a'},
-    {id:5,n:'Fantasy Almond',p:124800,c:'deluxe',t:'Rp 4.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/f8aaee6b-396c-4c6d-b541-2792fb5e0dc4.jpg?auth_key=1876334975-78f6621623b84b25919bedd8090ae629-0-722f8a3eab3edf61e6d0d8580e6deeba'},
-    {id:6,n:'Fantasy Caramel Malt',p:124800,c:'deluxe',t:'Rp 4.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/98a267de-a04e-4976-a7d9-2efcdb8f0863.jpg?auth_key=1876334364-b1c1bcdb0b6b48999f173915b02ebebb-0-e45be24418f1ffd60bc0d806771ab679'},
-    {id:7,n:'Tiramisu Cookies',p:124000,c:'deluxe',t:'Rp 4.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/bb643af1-c631-46fe-bb6a-24f46f80cb28.jpg?auth_key=1876335412-ba2693ea72f14b91a577e1b97d0c6c26-0-06913ebc79a8f6030b11d7f6cad5a994'},
-    {id:8,n:'143 Cup Strawberry',p:93000,c:'classic',t:'Rp 3.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/07363091-6b17-4803-9880-1c312ab1b731.jpg?auth_key=1876334364-65da03e916f549049a2381e779556dfd-0-8b47c2fa4b821e9d644cbc610d6ff113'},
-    {id:9,n:'KaKaKres Cokelat',p:92800,c:'classic',t:'Rp 3.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/cabf45ec-7fbf-4842-83bc-1beebf1d3261.jpg?auth_key=1876333067-b63f6b52de904252939281f30bd65fa4-0-17b85dfefc88766a7a45706bbafc9622'},
-    {id:10,n:'PisCok Krispi',p:92800,c:'classic',t:'Rp 3.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/b9fe4075-b451-4192-ada6-6fd6f17f22b7.jpg?auth_key=1876334364-22cf08a988c2473faad2ce4c7f998849-0-6c353834c09bf33113bb5f280beecc33'},
-    {id:11,n:'Tiger Choco',p:92800,c:'classic',t:'Rp 3.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/665cda64-8ea9-4b7d-b2b5-b738ac84cf5f.jpg?auth_key=1876333067-df24c5f11ca744d9a7cfd76b117f2e54-0-7bdea144aebbd6bacb04c4cfb5a5ed6e'},
-    {id:12,n:'Red Zebra Choco',p:92800,c:'classic',t:'Rp 3.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/b8f0857c-4a5a-411e-8c5b-7ea7a7273d1b.jpg?auth_key=1876335412-d077e1940ec14e17bc1ce9d5903f7d54-0-4914a0730bc79fe01655b29554504d34'},
-    {id:13,n:'SuKoCo Kopi',p:93000,c:'special',t:'Rp 2.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/0da0039b-6de6-49f6-83c2-2d2d0a081d56.jpg?auth_key=1876333067-c0f8f56ae397442bbfc77f89dc5ae9be-0-da3a577601d5e11972684bc502a89d11'},
-    {id:14,n:'SuTaCo Taro',p:93000,c:'special',t:'Rp 2.000/pcs',img:''},
-    {id:15,n:'SuMiCo Milo',p:93000,c:'special',t:'Rp 2.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/6d4ef0c0-ef40-4711-bf38-10de72c1c399.jpg?auth_key=1876333067-52e5a6e5b2d648b6a76c3b5d15cc214a-0-4359cd3c75d7cfb7cbfa5ea96b42a427'},
-    {id:16,n:'Yogurt Krispi',p:93000,c:'special',t:'Rp 2.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/179412c4-2e65-435a-9fdf-c5b652585c8f.jpg?auth_key=1876335412-f9f5e37a6b724d3a830c4b659a6e08ba-0-b966d94bf52554f32b4a33cfdf5f76f5'},
-    {id:17,n:'KastilEs Yogurt',p:77500,c:'kastiles',t:'Rp 2.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/36ebfa1c-f771-4672-b035-2b8f9d9b8cac.jpg?auth_key=1876334364-4e5aceb699ed40cbb620f1944a162ecd-0-d4e5a4a5b23a7eec95aaa50a19f54b8f'},
-    {id:18,n:'KastilEs Cokelat',p:77500,c:'kastiles',t:'Rp 2.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/b392f29c-8793-4369-87ae-61f6386f590b.jpg?auth_key=1876334364-4cf82553550d43cc86c5726f711dd2db-0-691b61ee87124a2b8ed63df9a428fc58'},
-    {id:19,n:'KastilEs Semangka Nanas',p:77500,c:'kastiles',t:'Rp 2.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/a29be2b5-aaea-4439-9d73-263002164c54.jpg?auth_key=1876333067-3e9fea21f01e4252b14be9cf26883ed7-0-cc81f1edf7d538eb10a2fd64312ef299'},
-    {id:20,n:'KastilEs Anggur Melon',p:77500,c:'kastiles',t:'Rp 2.000/pcs',img:''},
-    {id:21,n:'KastilEs Kopi',p:77500,c:'kastiles',t:'Rp 2.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/18a317c0-6ce2-4483-9ff2-693c0a7d6292.jpg?auth_key=1876333067-a2cfdea788df485ca62d6e56c1e00a36-0-71764f67dc7fa1e92ad6d6090ab48635'},
-    {id:22,n:'KastilEs Teh',p:77500,c:'kastiles',t:'Rp 2.000/pcs',img:'https://z-cdn-media.chatglm.cn/files/482f7abd-a011-4415-9eb3-0b680b3a2df6.jpg?auth_key=1876334364-edb9a2ba5b924fb99d7fb56dbebc4a5b-0-7f002127ed9536c3daf40d4144e4f3e9'},
-    {id:23,n:'KastilEs Gula Kelapa',p:77500,c:'kastiles',t:'Rp 2.000/pcs',img:''}
+    {id:1,n:'HaloChoco',p:158000,c:'premium',t:'Rp 5.000/pcs', d:'1 Dus Isi 40 Pcs | 5.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/a08848e8-2403-4954-9bd2-79d6b2adaeb5.jpg?auth_key=1876334364-189b4bffdea547c58d2605cadf49dc03-0-3a8d201e3d37f30a05badaeab877a900'},
+    {id:2,n:'HaloCookies',p:158000,c:'premium',t:'Rp 5.000/pcs', d:'1 Dus Isi 40 Pcs | 5.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/581e0a9e-a7fc-4184-9466-55bb4e31c8da.jpg?auth_key=1876335412-f7625ff55c40419fb7a5447a51f41056-0-ee1c339eff0ede587fe340dccb250499'},
+    {id:3,n:'Joycup Coklat',p:94800,c:'premium',t:'Rp 5.000/pcs', d:'1 Dus Isi 24 Pcs | 5.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/a460e636-0607-4502-8555-0bb7ffc94d19.jpg?auth_key=1876334364-a96f662de9c54c38b0a5fbd09e04c3db-0-c24b6ba341926f2eec8dd77fb90e24d9'},
+    {id:4,n:'23° Choco Cone',p:143000,c:'deluxe',t:'1 Dus Isi 42 | Rp 4.000/pcs', img:'https://z-cdn-media.chatglm.cn/files/472618ef-1a38-4232-9ecd-26b0045c677d.jpg?auth_key=1876334608-517189765afd463c8a6c0ef6d6f6fd2a-0-0c9c207409d26e65f4fed1997bf4f78a'},
+    {id:5,n:'Fantasy Almond',p:124800,c:'deluxe',t:'1 Dus Isi 40 | Rp 4.000/pcs', img:'https://z-cdn-media.chatglm.cn/files/f8aaee6b-396c-4c6d-b541-2792fb5e0dc4.jpg?auth_key=1876334975-78f6621623b84b25919bedd8090ae629-0-722f8a3eab3edf61e6d0d8580e6deeba'},
+    {id:6,n:'Fantasy Caramel Malt',p:124800,c:'deluxe',t:'1 Dus Isi 40 | Rp 4.000/pcs', img:'https://z-cdn-media.chatglm.cn/files/98a267de-a04e-4976-a7d9-2efcdb8f0863.jpg?auth_key=1876334364-b1c1bcdb0b6b48999f173915b02ebebb-0-e45be24418f1ffd60bc0d806771ab679'},
+    {id:7,n:'Tiramisu Cookies',p:124000,c:'deluxe',t:'1 Dus Isi 40 | Rp 4.000 Pe/ Pcs', img:'https://z-cdn-media.chatglm.cn/files/bb643af1-c631-46fe-bb6a-24f46f80cb28.jpg?auth_key=1876335412-ba2693ea72f14b91a577e1b97d0c6c26-0-06913ebc79a8f6030b11d7f6cad5a994'},
+    {id:8,n:'143 Cup Strawberry',p:93000,c:'classic',t:'1 Dus Isi 36 | Rp 3.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/07363091-6b17-4803-9880-1c312ab1b731.jpg?auth_key=1876334364-65da03e916f549049a2381e779556dfd-0-8b47c2fa4b821e9d644cbc610d6ff113'},
+    {id:9,n:'KaKaKres Cokelat',p:92800,c:'classic',t:'1 Dus Isi 40 | Rp 3.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/cabf45ec-7fbf-4842-83bc-1beebf1d3261.jpg?auth_key=1876333067-b63f6b52de904252939281f30bd65fa4-0-17b85dfefc88766a7a45706bbafc9622'},
+    {id:10,n:'PisCok Krispi',p:92800,c:'classic',t:'1 Dus Isi 40 | Rp 3.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/9230fe43-7ab5-4abf-b1f8-7850e467b239.jpg?auth_key=1877384969-4484a0ab44114a2793bdf80a5926e249-0-6fbb4baae63d2a9fe11e8d39dcad2a99'},
+    {id:11,n:'Tiger Choco',p:92800,c:'classic',t:'1 Dus Isi 40 | Rp 3.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/665cda64-8ea9-4b7d-b2b5-b738ac84cf5f.jpg?auth_key=1876333067-df24c5f11ca744d9a7cfd76b117f2e54-0-7bdea144aebbd6bacb04c4cfb5a5ed6e'},
+    {id:12,n:'Red Zebra Choco',p:92800,c:'classic',t:'1 Dus Isi 40 | Rp 3.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/b8f0857c-4a5a-411e-8c5b-7ea7a7273d1b.jpg?auth_key=1876335412-d077e1940ec14e17bc1ce9d5903f7d54-0-4914a0730bc79fe01655b29554504d34'},
+    {id:13,n:'SuKoCo Kopi',p:93000,c:'special',t:'Rp 2.000/pcs', d:'1 Dus Isi 60 Pcs | 2.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/0da0039b-6de6-49f6-83c2-2d2d0a081d56.jpg?auth_key=1876333067-c0f8f56ae397442bbfc77f89dc5ae9be-0-da3a577601d5e11972684bc502a89d11'},
+    {id:14,n:'SuTaCo Taro',p:93000,c:'special',t:'Rp 2.000/pcs', d:'1 Dus Isi 60 Pcs | 2.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/46ec782d-26ec-40f3-8595-2d2d675cea22.jpg?auth_key=1877384969-ed320ffebc254916875f273fa426cfeb-0-f03896e6f93a6521d4ec0fc740ee0129'},
+    {id:15,n:'SuMiCo Milo',p:93000,c:'special',t:'Rp 2.000/pcs', d:'1 Dus Isi 60 Pcs | 2.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/6d4ef0c0-ef40-4711-bf38-10de72c1c399.jpg?auth_key=1876333067-52e5a6e5b2d648b6a76c3b5d15cc214a-0-4359cd3c75d7cfb7cbfa5ea96b42a427'},
+    {id:16,n:'Yogurt Krispi',p:93000,c:'special',t:'Rp 2.000/pcs', d:'1 Dus Isi 60 Pcs | 2.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/179412c4-2e65-435a-9fdf-c5b652585c8f.jpg?auth_key=1876335412-f9f5e37a6b724d3a830c4b659a6e08ba-0-b966d94bf52554f32b4a33cfdf5f76f5'},
+    {id:17,n:'KastilEs Yogurt',p:77500,c:'kastiles',t:'Rp 2.000/pcs', d:'1 Dus Isi 50 Pcs | 2.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/36ebfa1c-f771-4672-b035-2b8f9d9b8cac.jpg?auth_key=1876334364-4e5aceb699ed40cbb620f1944a162ecd-0-d4e5a4a5b23a7eec95aaa50a19f54b8f'},
+    {id:18,n:'KastilEs Cokelat',p:77500,c:'kastiles',t:'Rp 2.000/pcs', d:'1 Dus Isi 50 Pcs | 2.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/b392f29c-8793-4369-87ae-61f6386f590b.jpg?auth_key=1876334364-4cf82553550d43cc86c5726f711dd2db-0-691b61ee87124a2b8ed63df9a428fc58'},
+    {id:19,n:'KastilEs Gula Kelapa',p:77500,c:'kastiles',t:'Rp 2.000/pcs', d:'1 Dus Isi 50 Pcs | 2.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/ad6627f9-cba8-412d-b0b6-2d8473273be4.jpg?auth_key=1877384969-9812e23e97a74176aa4e6fed43cd4ef9-0-f390976ef0444e7651fd22af8db1693b'},
+    {id:20,n:'KastilEs Anggur Melon',p:77500,c:'kastiles',t:'Rp 2.000/pcs', d:'1 Dus Isi 50 Pcs | 2.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/02495293-c24a-41b3-bf3a-8ba132d32add.jpg?auth_key=1877384969-42f96e7b898c494faaf96ebf5f8de632-0-e03d1d048b0f5322d9b44096004434ba'},
+    {id:21,n:'KastilEs Kopi',p:77500,c:'kastiles',t:'Rp 2.000/pcs', d:'1 Dus Isi 50 Pcs | 2.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/18a317c0-6ce2-4483-9ff2-693c0a7d6292.jpg?auth_key=1876333067-a2cfdea788df485ca62d6e56c1e00a36-0-71764f67dc7fa1e92ad6d6090ab48635'},
+    {id:22,n:'KastilEs Teh',p:77500,c:'kastiles',t:'Rp 2.000/pcs', d:'1 Dus Isi 50 Pcs | 2.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/482f7abd-a011-4415-9eb3-0b680b3a2df6.jpg?auth_key=1876334364-edb9a2ba5b924fb99d7fb56dbebc4a5b-0-7f002127ed9536c3daf40d4144e4f3e9'},
+    {id:23,n:'KastilEs Semangka + Nanas',p:77500,c:'kastiles',t:'Rp 2.000/pcs', d:'1 Dus Isi 50 Pcs | 2.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/e61eed31-520a-4e98-87b8-0edbf81f4592.jpg?auth_key=1877385572-0a3f1c386ad449dfa98524447001e976-0-d8633cf953cad4a0a2201ced3cba333a'}
 ];
 
 const META={
@@ -200,28 +261,71 @@ const META={
     classic:{e:'⭐',l:'Classic'},special:{e:'💜',l:'Special'},
     kastiles:{e:'🏰',l:'KastilEs'}
 };
+
 const fmt=n=>'Rp '+n.toLocaleString('id-ID');
 let cart={},curCat='all';
 
+// --- LOGIC ---
+
+// 1. Toast Notification
 function toast(m){
     const c=document.getElementById('toasts'),d=document.createElement('div');
-    d.className='toast-in pointer-events-auto px-4 py-3 bg-coco-900 border border-coco-800/30 rounded-xl text-sm text-coco-100 shadow-xl flex items-center gap-3';
-    d.innerHTML=`<i class="fas fa-check-circle text-green-400 text-sm"></i>${m}`;
+    d.className='toast-in pointer-events-auto px-4 py-3 bg-white border border-brand-100 rounded-xl shadow-lg text-sm text-coco-800 flex items-center gap-3';
+    d.innerHTML=`<i class="fas fa-check-circle text-green-500 text-sm"></i><span class="font-medium">${m}</span>`;
     c.appendChild(d);
-    setTimeout(()=>{d.classList.replace('toast-in','toast-out');setTimeout(()=>d.remove(),200)},1500);
+    setTimeout(()=>{d.classList.replace('toast-in','toast-out');setTimeout(()=>d.remove(),200)},2000);
 }
 
+// 2. Placeholder Sync Logic
+const defaultStoreName = "H A L O C O K O";
+const defaultStoreLoc = "CABANG INKA 3 INDRAMAYU";
+
+function updatePlaceholders() {
+    const nameVal = document.getElementById('inputStoreName').value.trim();
+    const locVal = document.getElementById('inputStoreLoc').value.trim();
+    const displayName = nameVal ? nameVal : defaultStoreName;
+    const displayLoc = locVal ? locVal : defaultStoreLoc;
+
+    const elName = ['displayNavName', 'displayHeroName', 'displayFooterName'];
+    const elLoc = ['displayNavLoc', 'displayHeroLoc'];
+
+    elName.forEach(id => {
+        const el = document.getElementById(id);
+        if(el) {
+            el.textContent = displayName;
+            el.classList.toggle('text-brand-600', !!nameVal);
+            el.classList.toggle('text-coco-300', !nameVal);
+        }
+    });
+
+    elLoc.forEach(id => {
+        const el = document.getElementById(id);
+        if(el) {
+            el.textContent = displayLoc;
+            el.classList.toggle('text-coco-600', !!locVal);
+            el.classList.toggle('text-coco-400', !locVal);
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    updatePlaceholders();
+    document.getElementById('inputStoreName').addEventListener('input', updatePlaceholders);
+    document.getElementById('inputStoreLoc').addEventListener('input', updatePlaceholders);
+});
+
+// 3. Render Functions
 function renderTabs(){
     document.getElementById('tabs').innerHTML=CATS.map(c=>
-        `<button onclick="setCat('${c.id}')" class="tab-b flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-lg border border-transparent text-xs font-medium text-coco-200/60 hover:text-coco-100 ${curCat===c.id?'on':''}">
-            <i class="fas ${c.ic} text-xs"></i>${c.n}${c.t?`<span class="hidden sm:inline text-[10px] opacity-40 ml-1">${c.t}</span>`:''}
+        `<button onclick="setCat('${c.id}')" class="tab-b flex-shrink-0 flex items-center gap-2 px-5 py-2 rounded-full border border-transparent text-xs font-bold text-coco-500 hover:bg-white hover:shadow-sm transition-all ${curCat===c.id?'on shadow-sm':''}">
+            <i class="fas ${c.ic}"></i>${c.n} ${c.t?`<span class="ml-1 opacity-50 font-normal">${c.t}</span>`:''}
         </button>`).join('');
 }
 function setCat(id){curCat=id;renderTabs();renderGrid();}
 
 function imgHTML(p){
     if(p.img) return `<img src="${p.img}" alt="${p.n}" class="prod-img w-full h-full" loading="lazy">`;
-    return `<div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-coco-800/20 to-coco-900/20"><i class="fas fa-ice-cream text-3xl text-coco-700/30"></i></div>`;
+    return `<div class="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-coco-100 to-coco-200"><i class="fas fa-image text-3xl text-coco-300 mb-1"></i><span class="text-[10px] text-coco-400">No Img</span></div>`;
 }
 
 function renderGrid(){
@@ -229,22 +333,30 @@ function renderGrid(){
     const list=curCat==='all'?PROD:PROD.filter(p=>p.c===curCat);
     g.innerHTML=list.map((p,i)=>{
         const q=cart[p.id]||0,sel=q>0,m=META[p.c];
-        return `<div id="c${p.id}" class="card bg-coco-900/70 rounded-2xl overflow-hidden border ${sel?'border-brand-600/50':'border-coco-800/15'} anim-up" style="animation-delay:${i*30}ms">
-            <div class="aspect-[4/3] overflow-hidden relative">
+        // Logic: Jika ada field 'd' (detail), gunakan itu. Jika tidak, gunakan 't'.
+        const detailText = p.d ? p.d : p.t;
+        
+        return `<div id="c${p.id}" class="card bg-white rounded-2xl overflow-hidden relative flex flex-col ${sel?'ring-2 ring-brand-400 ring-offset-2':''} anim-up" style="animation-delay:${i*30}ms">
+            <div class="aspect-[4/3] overflow-hidden bg-coco-100 relative">
                 ${imgHTML(p)}
-                <span class="absolute top-2 left-2 text-[10px] px-2 py-0.5 rounded-md bg-black/70 backdrop-blur-sm text-coco-300/80 font-medium tracking-wide">${m.e} ${m.l}</span>
-                <span id="cb${p.id}" class="${sel?'absolute top-2 right-2 min-w-[20px] h-5 px-1 rounded-full bg-brand-500 text-white text-[10px] font-bold flex items-center justify-center':'hidden'}">${sel?q:''}</span>
+                <span class="absolute top-2 left-2 text-[10px] px-2 py-0.5 rounded-md bg-white/90 backdrop-blur-sm shadow-sm text-coco-600 font-bold tracking-wide">${m.e} ${m.l}</span>
+                <span id="cb${p.id}" class="${sel?'absolute top-2 right-2 min-w-[20px] h-5 px-1 rounded-full bg-brand-500 text-white text-[10px] font-bold flex items-center justify-center shadow-md':'hidden'}">${sel?q:''}</span>
             </div>
-            <div class="p-3">
-                <span class="text-[10px] px-2 py-0.5 rounded bg-brand-900/20 text-brand-300/60 font-medium tracking-wide">${p.t}</span>
-                <h3 class="font-bold text-coco-50 text-sm mt-1.5 leading-tight truncate">${p.n}</h3>
-                <p class="text-coco-300 font-bold text-base my-2">${fmt(p.p)}</p>
-                <div class="flex items-center justify-center gap-3">
-                    <button id="mn${p.id}" onclick="chg(${p.id},-1)" class="w-9 h-9 rounded-lg ${q>0?'bg-coco-800 text-coco-200 hover:text-red-400':'bg-coco-800/40 text-coco-200/30'} flex items-center justify-center transition-colors"><i class="fas fa-minus text-xs"></i></button>
-                    <span id="q${p.id}" class="text-coco-50 font-bold text-base w-5 text-center">${q}</span>
-                    <button onclick="chg(${p.id},1)" class="w-9 h-9 rounded-lg bg-brand-700/30 text-brand-300 hover:bg-brand-700/50 flex items-center justify-center transition-colors"><i class="fas fa-plus text-xs"></i></button>
+            <div class="p-3 flex flex-col flex-1">
+                <!-- Title -->
+                <h3 class="font-bold text-coco-900 text-sm leading-tight mb-1 line-clamp-1">${p.n}</h3>
+                <!-- New Detail Logic -->
+                <p class="text-xs text-coco-500 mb-2 font-medium leading-snug ${p.d ? 'font-semibold' : ''}">${detailText}</p>
+                
+                <div class="mt-auto flex items-center justify-between gap-2">
+                    <span class="text-brand-600 font-extrabold text-base">${fmt(p.p)}</span>
+                    <div class="flex items-center bg-coco-100 rounded-lg p-0.5">
+                        <button id="mn${p.id}" onclick="chg(${p.id},-1)" class="w-7 h-7 rounded-md flex items-center justify-center text-coco-500 hover:bg-white hover:text-red-500 transition-colors"><i class="fas fa-minus text-xs"></i></button>
+                        <span id="q${p.id}" class="text-coco-900 font-bold text-xs w-5 text-center">${q}</span>
+                        <button onclick="chg(${p.id},1)" class="w-7 h-7 rounded-md flex items-center justify-center text-brand-500 hover:bg-brand-500 hover:text-white transition-colors"><i class="fas fa-plus text-xs"></i></button>
+                    </div>
                 </div>
-                <p id="s${p.id}" class="text-center text-[11px] text-brand-300/70 font-bold mt-1.5 ${sel?'':'hidden'}">${sel?fmt(p.p*q):''}</p>
+                <p id="s${p.id}" class="text-right text-[10px] text-brand-500 font-bold mt-1.5 ${sel?'':'hidden'}">${sel?fmt(p.p*q):''}</p>
             </div>
         </div>`;
     }).join('');
@@ -259,18 +371,33 @@ function chg(id,d){
     const card=document.getElementById('c'+id);
     const badge=document.getElementById('cb'+id);
     const mn=document.getElementById('mn'+id);
+    
     if(!qEl)return;
     qEl.textContent=q;
     qEl.classList.add('pop');setTimeout(()=>qEl.classList.remove('pop'),200);
     sEl.classList.toggle('hidden',!has);
     if(has)sEl.textContent=fmt(p.p*q);
-    if(has){badge.className='absolute top-2 right-2 min-w-[20px] h-5 px-1 rounded-full bg-brand-500 text-white text-[10px] font-bold flex items-center justify-center';badge.textContent=q;}
-    else{badge.className='hidden';}
-    card.classList.toggle('border-brand-600/50',has);
-    card.classList.toggle('border-coco-800/15',!has);
-    mn.className=`w-9 h-9 rounded-lg ${has?'bg-coco-800 text-coco-200 hover:text-red-400':'bg-coco-800/40 text-coco-200/30'} flex items-center justify-center transition-colors`;
+    
+    if(has){
+        badge.className='absolute top-2 right-2 min-w-[20px] h-5 px-1 rounded-full bg-brand-500 text-white text-[10px] font-bold flex items-center justify-center shadow-md animate-bounce';
+        badge.textContent=q;
+        setTimeout(()=>badge.classList.remove('animate-bounce'), 1000);
+    } else {
+        badge.className='hidden';
+    }
+    
+    card.classList.toggle('ring-2',has);
+    card.classList.toggle('ring-offset-2',has);
+    card.classList.toggle('ring-brand-400',has);
+    
+    mn.className=`w-7 h-7 rounded-md flex items-center justify-center ${has?'text-coco-500 hover:text-red-500':'text-coco-300 cursor-not-allowed'} transition-colors`;
+    
     updBadge();
-    if(has&&d>0)toast(`${p.n} +1`);
+    
+    // Updated Toast Logic
+    if(has && d > 0) {
+        toast('Pesanan anda telah dimasukkan ke keranjang.');
+    }
 }
 
 function updBadge(){
@@ -283,17 +410,23 @@ function updBadge(){
     document.getElementById('fab').classList.toggle('hidden',cnt===0);
 }
 
-function clearCart(){cart={};updBadge();renderGrid();renderCartList();toast('Keranjang dikosongkan');}
+function clearCart(){cart={};updBadge();renderGrid();renderCartList();toast('Keranjang dibersihkan');}
 
 function openCart(){
     const o=document.getElementById('cartOv'),p=document.getElementById('cartP');
-    o.classList.remove('hidden');p.classList.remove('slide-out');p.classList.add('slide-r');
+    o.classList.remove('hidden');
+    requestAnimationFrame(()=>{
+        p.classList.remove('translate-x-full');
+        p.classList.add('translate-x-0');
+    });
     renderCartList();
 }
+
 function closeCart(){
     const p=document.getElementById('cartP');
-    p.classList.remove('slide-r');p.classList.add('slide-out');
-    setTimeout(()=>document.getElementById('cartOv').classList.add('hidden'),250);
+    p.classList.remove('translate-x-0');
+    p.classList.add('translate-x-full');
+    setTimeout(()=>document.getElementById('cartOv').classList.add('hidden'),300);
 }
 
 function renderCartList(){
@@ -301,26 +434,30 @@ function renderCartList(){
     const entries=Object.entries(cart);
     if(!entries.length){list.classList.add('hidden');empty.classList.remove('hidden');foot.classList.add('hidden');return;}
     list.classList.remove('hidden');empty.classList.add('hidden');foot.classList.remove('hidden');
+    
     const grouped={};
     entries.forEach(([id,qty])=>{const p=PROD.find(x=>x.id===+id);if(!p)return;if(!grouped[p.c])grouped[p.c]=[];grouped[p.c].push({...p,qty});});
+    
     let html='',total=0;
     Object.entries(grouped).forEach(([cat,items])=>{
         const m=META[cat];
-        html+=`<div class="mb-4"><p class="text-[11px] font-bold text-coco-300/40 uppercase tracking-wider mb-2">${m.e} ${m.l} — ${items[0].t}</p>`;
+        html+=`<div class="mb-4 last:mb-0"><p class="text-[11px] font-bold text-coco-400 uppercase tracking-wider mb-2 pl-1 border-l-2 border-brand-200">${m.e} ${m.l}</p>`;
         items.forEach(it=>{
             total+=it.p*it.qty;
-            html+=`<div class="flex items-center gap-3 p-3 rounded-xl bg-coco-900/50 border border-coco-800/10 mb-2">
-                ${it.img?`<img src="${it.img}" alt="" class="w-12 h-12 rounded-lg object-cover flex-shrink-0">`:`<div class="w-12 h-12 rounded-lg bg-coco-800/30 flex items-center justify-center flex-shrink-0"><i class="fas fa-ice-cream text-coco-700/40 text-lg"></i></div>`}
+            html+=`<div class="flex items-center gap-3 p-3 rounded-xl bg-white border border-coco-100 shadow-sm mb-2">
+                ${it.img?`<img src="${it.img}" alt="" class="w-12 h-12 rounded-lg object-cover flex-shrink-0 bg-coco-50">`:`<div class="w-12 h-12 rounded-lg bg-coco-100 flex items-center justify-center flex-shrink-0"><i class="fas fa-ice-cream text-coco-300"></i></div>`}
                 <div class="flex-1 min-w-0">
-                    <p class="text-coco-50 text-sm font-bold truncate">${it.n}</p>
-                    <p class="text-coco-200/40 text-xs">${fmt(it.p)} × ${it.qty}</p>
+                    <p class="text-coco-900 text-sm font-bold truncate">${it.n}</p>
+                    <p class="text-coco-400 text-xs">${fmt(it.p)} x ${it.qty}</p>
                 </div>
-                <div class="flex items-center gap-1.5 bg-coco-800/60 rounded-lg px-1.5 py-1">
-                    <button onclick="cChg(${it.id},-1)" class="w-7 h-7 rounded flex items-center justify-center text-coco-200/40 hover:text-red-400 text-xs"><i class="fas fa-minus"></i></button>
-                    <span class="text-coco-50 text-sm font-bold w-4 text-center">${it.qty}</span>
-                    <button onclick="cChg(${it.id},1)" class="w-7 h-7 rounded flex items-center justify-center text-coco-200/40 hover:text-brand-300 text-xs"><i class="fas fa-plus"></i></button>
+                <div class="flex flex-col items-end gap-1">
+                    <span class="text-coco-900 text-sm font-bold">${fmt(it.p*it.qty)}</span>
+                    <div class="flex items-center bg-coco-100 rounded-md">
+                        <button onclick="cChg(${it.id},-1)" class="w-6 h-6 flex items-center justify-center text-coco-400 hover:text-red-500 text-xs"><i class="fas fa-minus"></i></button>
+                        <span class="text-xs font-bold w-4 text-center text-coco-700">${it.qty}</span>
+                        <button onclick="cChg(${it.id},1)" class="w-6 h-6 flex items-center justify-center text-brand-500 hover:text-brand-600 text-xs"><i class="fas fa-plus"></i></button>
+                    </div>
                 </div>
-                <span class="text-coco-300 text-sm font-bold w-20 text-right">${fmt(it.p*it.qty)}</span>
             </div>`;
         });
         html+='</div>';
@@ -334,16 +471,15 @@ function cChg(id,d){chg(id,d);renderCartList();}
 function sendWA(){
     const entries=Object.entries(cart);
     if(!entries.length)return;
-
-    const namaToko = document.getElementById('inputStoreName').value.trim();
-    const lokasiToko = document.getElementById('inputStoreLoc').value.trim();
+    const namaToko = document.getElementById('inputStoreName').value.trim() || defaultStoreName;
+    const lokasiToko = document.getElementById('inputStoreLoc').value.trim() || defaultStoreLoc;
     
     let message = `*NOTA PEMESANAN ICE CREAM*\n`;
-    message += `-------------------------------------------------------\n`;
-    message += `*Nama Toko :* ${namaToko}\n`;
-    message += `*Lokasi Toko :* ${lokasiToko}\n`;
-    message += `-------------------------------------------------------\n`;
-    message += `*Detail & Total Pemesanan :*\n`;
+    message += `--------------------------------\n`;
+    message += `*Toko :* ${namaToko}\n`;
+    message += `*Lokasi :* ${lokasiToko}\n`;
+    message += `--------------------------------\n`;
+    message += `*Detail Pesanan :*\n`;
 
     let totalHarga = 0;
     const sortedEntries = entries.sort((a, b) => parseInt(a[0]) - parseInt(b[0]));
@@ -351,16 +487,17 @@ function sendWA(){
     sortedEntries.forEach(([id, qty]) => {
         const p = PROD.find(x => x.id == id);
         if(p) {
-            message += `-  ${p.n} ${qty}\n`;
-            totalHarga += p.p * qty;
+            const sub = p.p * qty;
+            totalHarga += sub;
+            message += `➖ ${p.n} (${qty}x)\n   ${fmt(sub)}\n`;
         }
     });
 
-    message += `\n\n`; 
-    message += `-------------------------------------------------------\n`;
-    message += `*Jumlah Harga :* ${fmt(totalHarga)}\n`;
-    message += `-------------------------------------------------------\n`;
-    message += `*Mohon Konfirmasi Pesanan Ini, Terimakasih!🙏*`;
+    message += `\n`; 
+    message += `--------------------------------\n`;
+    message += `*TOTAL BAYAR :* ${fmt(totalHarga)}\n`;
+    message += `--------------------------------\n`;
+    message += `*Mohon diproses ya! Terimakasih🙏*`;
 
     window.open('https://wa.me/6282241489084?text='+encodeURIComponent(message),'_blank');
     setTimeout(()=>closeCart(),400);
