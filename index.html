@@ -12,31 +12,15 @@
             theme: {
                 extend: {
                     colors: {
-                        // Palette Family Friendly
                         brand: { 
-                            50:'#fff7ed', 
-                            100:'#ffedd5', 
-                            200:'#fed7aa', 
-                            300:'#fdba74', 
-                            400:'#fb923c', 
-                            500:'#f97316', 
-                            600:'#ea580c', 
-                            700:'#c2410c', 
-                            800:'#9a3412', 
-                            900:'#7c2d12' 
+                            50:'#fff7ed', 100:'#ffedd5', 200:'#fed7aa', 300:'#fdba74', 
+                            400:'#fb923c', 500:'#f97316', 600:'#ea580c', 700:'#c2410c', 
+                            800:'#9a3412', 900:'#7c2d12' 
                         },
                         coco: { 
-                            50:'#fffbeb', 
-                            100:'#fef3c7', 
-                            200:'#fde68a', 
-                            300:'#fcd34d', 
-                            400:'#fbbf24', 
-                            500:'#f59e0b', 
-                            600:'#d97706', 
-                            700:'#b45309', 
-                            800:'#92400e', 
-                            900:'#78350f',
-                            950:'#451a03'
+                            50:'#fffbeb', 100:'#fef3c7', 200:'#fde68a', 300:'#fcd34d', 
+                            400:'#fbbf24', 500:'#f59e0b', 600:'#d97706', 700:'#b45309', 
+                            800:'#92400e', 900:'#78350f', 950:'#451a03'
                         }
                     },
                     fontFamily: { jakarta:['Plus Jakarta Sans','sans-serif'] }
@@ -70,14 +54,22 @@
         .tab-b{transition:all .2s}
         .tab-b.on{background:rgba(249, 115, 22, 0.15);color:#ea580c;border-color:#fdba74; background-color: #fff7ed;}
         
-        .prod-img{object-fit:cover;transition:transform .4s ease-in-out;}
-        .card:hover .prod-img{transform:scale(1.08);}
-        
         .glass-panel {
             background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(251, 191, 36, 0.3);
         }
+
+        /* CSS untuk melindungi gambar dari di-drag atau di-select */
+        .img-secure {
+            user-select: none;
+            -webkit-user-drag: none;
+            -webkit-touch-callout: none;
+            pointer-events: auto; /* Pastikan klik pada tombol di bawahnya tetap jalan jika overlap */
+        }
+        
+        .prod-img{object-fit:cover;transition:transform .4s ease-in-out; width: 100%; height: 100%;}
+        .card:hover .prod-img{transform:scale(1.08);}
     </style>
 </head>
 <body class="text-coco-900 font-jakarta min-h-screen selection:bg-brand-200 selection:text-coco-900">
@@ -90,7 +82,7 @@
     <div class="max-w-xl mx-auto px-4 h-16 flex items-center justify-between">
         <div class="flex items-center gap-3">
             <div class="w-10 h-10 rounded-full bg-gradient-to-br from-brand-400 to-brand-600 p-0.5 shadow-md">
-                <img src="https://z-cdn-media.chatglm.cn/files/4eb3eae2-a8b3-4ba2-91b0-38f754547d86.png?auth_key=1876332664-95accd10cf2c4881aeec879f19c643cf-0-174c0c0e8e2ee162413e913b884b8889" alt="HALOCOKO" class="w-full h-full object-contain bg-white rounded-full p-1">
+                <img src="https://z-cdn-media.chatglm.cn/files/4eb3eae2-a8b3-4ba2-91b0-38f754547d86.png?auth_key=1876332664-95accd10cf2c4881aeec879f19c643cf-0-174c0c0e8e2ee162413e913b884b8889" alt="HALOCOKO" class="w-full h-full object-contain bg-white rounded-full p-1 img-secure">
             </div>
             <div class="block overflow-hidden">
                 <p id="displayNavName" class="text-brand-600 font-extrabold text-base leading-tight truncate transition-colors">H A L O C O K O</p>
@@ -111,7 +103,7 @@
 <section class="pt-24 pb-8 px-4 bg-gradient-to-b from-brand-50 to-coco-50">
     <div class="max-w-xl mx-auto text-center py-8">
         <div class="flex justify-center mb-6 anim-up" style="animation-delay:0.1s">
-            <img src="https://z-cdn-media.chatglm.cn/files/4eb3eae2-a8b3-4ba2-91b0-38f754547d86.png?auth_key=1876332664-95accd10cf2c4881aeec879f19c643cf-0-174c0c0e8e2ee162413e913b884b8889" alt="HALOCOKO Logo" class="w-48 h-auto drop-shadow-xl" style="animation: bounce-slow 3s infinite ease-in-out;">
+            <img src="https://z-cdn-media.chatglm.cn/files/4eb3eae2-a8b3-4ba2-91b0-38f754547d86.png?auth_key=1876332664-95accd10cf2c4881aeec879f19c643cf-0-174c0c0e8e2ee162413e913b884b8889" alt="HALOCOKO Logo" class="w-48 h-auto drop-shadow-xl img-secure" style="animation: bounce-slow 3s infinite ease-in-out;">
         </div>
         
         <h1 id="displayHeroName" class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-brand-400 mb-2 anim-up leading-tight" style="animation-delay:0.2s">H A L O C O K O</h1>
@@ -153,7 +145,7 @@
 <footer class="bg-white border-t border-coco-100 py-8 px-4 mt-8">
     <div class="max-w-xl mx-auto flex flex-col items-center justify-center gap-4 text-center">
         <div class="w-12 h-12 mb-2">
-             <img src="https://z-cdn-media.chatglm.cn/files/4eb3eae2-a8b3-4ba2-91b0-38f754547d86.png?auth_key=1876332664-95accd10cf2c4881aeec879f19c643cf-0-174c0c0e8e2ee162413e913b884b8889" alt="Logo" class="w-full h-full object-contain opacity-80">
+             <img src="https://z-cdn-media.chatglm.cn/files/4eb3eae2-a8b3-4ba2-91b0-38f754547d86.png?auth_key=1876332664-95accd10cf2c4881aeec879f19c643cf-0-174c0c0e8e2ee162413e913b884b8889" alt="Logo" class="w-full h-full object-contain opacity-80 img-secure">
         </div>
         <h3 id="displayFooterName" class="font-bold text-coco-900">Masukan Nama Toko Anda</h3>
         <p class="text-coco-400 text-xs">© 2026 Halocoko INKA3 - All right reserved.</p>
@@ -312,6 +304,14 @@ document.addEventListener('DOMContentLoaded', () => {
     updatePlaceholders();
     document.getElementById('inputStoreName').addEventListener('input', updatePlaceholders);
     document.getElementById('inputStoreLoc').addEventListener('input', updatePlaceholders);
+    
+    // SECURITY SCRIPT: Mencegah Klik Kanan pada Semua Gambar
+    document.addEventListener('contextmenu', function(e) {
+        if (e.target.tagName === 'IMG') {
+            e.preventDefault();
+            return false;
+        }
+    });
 });
 
 // 3. Render Functions
@@ -324,8 +324,9 @@ function renderTabs(){
 function setCat(id){curCat=id;renderTabs();renderGrid();}
 
 function imgHTML(p){
-    if(p.img) return `<img src="${p.img}" alt="${p.n}" class="prod-img w-full h-full" loading="lazy">`;
-    return `<div class="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-coco-100 to-coco-200"><i class="fas fa-image text-3xl text-coco-300 mb-1"></i><span class="text-[10px] text-coco-400">No Img</span></div>`;
+    // PERUBAHAN: Menambahkan class 'img-secure', draggable="false", dan oncontextmenu="return false"
+    if(p.img) return `<img src="${p.img}" alt="${p.n}" class="prod-img img-secure w-full h-full" loading="lazy" draggable="false" oncontextmenu="return false;">`;
+    return `<div class="w-full h-full flex flex-col items-center justify-center bg-white"><i class="fas fa-image text-4xl text-gray-200 mb-1"></i><span class="text-[10px] text-gray-300">No Img</span></div>`;
 }
 
 function renderGrid(){
@@ -333,19 +334,16 @@ function renderGrid(){
     const list=curCat==='all'?PROD:PROD.filter(p=>p.c===curCat);
     g.innerHTML=list.map((p,i)=>{
         const q=cart[p.id]||0,sel=q>0,m=META[p.c];
-        // Logic: Jika ada field 'd' (detail), gunakan itu. Jika tidak, gunakan 't'.
         const detailText = p.d ? p.d : p.t;
         
         return `<div id="c${p.id}" class="card bg-white rounded-2xl overflow-hidden relative flex flex-col ${sel?'ring-2 ring-brand-400 ring-offset-2':''} anim-up" style="animation-delay:${i*30}ms">
-            <div class="aspect-[4/3] overflow-hidden bg-coco-100 relative">
+            <div class="aspect-[4/3] overflow-hidden bg-white relative border-b border-coco-50">
                 ${imgHTML(p)}
-                <span class="absolute top-2 left-2 text-[10px] px-2 py-0.5 rounded-md bg-white/90 backdrop-blur-sm shadow-sm text-coco-600 font-bold tracking-wide">${m.e} ${m.l}</span>
+                <span class="absolute top-2 left-2 text-[10px] px-2 py-0.5 rounded-md bg-white/90 backdrop-blur-sm shadow-sm text-coco-600 font-bold tracking-wide select-none">${m.e} ${m.l}</span>
                 <span id="cb${p.id}" class="${sel?'absolute top-2 right-2 min-w-[20px] h-5 px-1 rounded-full bg-brand-500 text-white text-[10px] font-bold flex items-center justify-center shadow-md':'hidden'}">${sel?q:''}</span>
             </div>
             <div class="p-3 flex flex-col flex-1">
-                <!-- Title -->
                 <h3 class="font-bold text-coco-900 text-sm leading-tight mb-1 line-clamp-1">${p.n}</h3>
-                <!-- New Detail Logic -->
                 <p class="text-xs text-coco-500 mb-2 font-medium leading-snug ${p.d ? 'font-semibold' : ''}">${detailText}</p>
                 
                 <div class="mt-auto flex items-center justify-between gap-2">
@@ -394,7 +392,6 @@ function chg(id,d){
     
     updBadge();
     
-    // Updated Toast Logic
     if(has && d > 0) {
         toast('Pesanan anda telah dimasukkan ke keranjang.');
     }
@@ -445,7 +442,7 @@ function renderCartList(){
         items.forEach(it=>{
             total+=it.p*it.qty;
             html+=`<div class="flex items-center gap-3 p-3 rounded-xl bg-white border border-coco-100 shadow-sm mb-2">
-                ${it.img?`<img src="${it.img}" alt="" class="w-12 h-12 rounded-lg object-cover flex-shrink-0 bg-coco-50">`:`<div class="w-12 h-12 rounded-lg bg-coco-100 flex items-center justify-center flex-shrink-0"><i class="fas fa-ice-cream text-coco-300"></i></div>`}
+                ${it.img?`<img src="${it.img}" alt="" class="w-12 h-12 rounded-lg object-cover flex-shrink-0 bg-white img-secure" draggable="false" oncontextmenu="return false;">`:`<div class="w-12 h-12 rounded-lg bg-white flex items-center justify-center flex-shrink-0"><i class="fas fa-ice-cream text-coco-300"></i></div>`}
                 <div class="flex-1 min-w-0">
                     <p class="text-coco-900 text-sm font-bold truncate">${it.n}</p>
                     <p class="text-coco-400 text-xs">${fmt(it.p)} x ${it.qty}</p>
